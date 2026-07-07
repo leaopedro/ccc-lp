@@ -1,4 +1,4 @@
-import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
+import { WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../lib/links'
 
 export default function Hero() {
   return (
@@ -82,7 +82,7 @@ export default function Hero() {
                 <circle cx="12" cy="12" r="4" />
                 <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
               </svg>
-              @casacarclub.curitiba
+              @{INSTAGRAM_HANDLE}
             </a>
             <span style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.15)' }} />
             <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.24em', fontSize: 11, color: '#D4AF37' }}>
