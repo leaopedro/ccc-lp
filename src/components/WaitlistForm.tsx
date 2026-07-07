@@ -1,6 +1,7 @@
 import { useState, useRef, type FormEvent, type ChangeEvent } from 'react'
 import { submitToWaitlist, type WaitlistEntry } from '../lib/waitlist'
 import { isDisabled } from '../lib/formConfig'
+import { WHATSAPP_URL } from '../lib/links'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -180,7 +181,7 @@ export default function WaitlistForm() {
             <p style={{ margin: '0 auto', maxWidth: 400, fontSize: 14.5, lineHeight: 1.7, color: '#c7bfb1' }}>
               Recebemos seu cadastro. Em breve entramos em contato com novidades e o convite para o grupo privado no WhatsApp.
             </p>
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="btn-outline-gold" style={{ marginTop: 26 }}>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold" style={{ marginTop: 26 }}>
               Entrar no Grupo WhatsApp
             </a>
           </div>

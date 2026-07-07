@@ -1,3 +1,5 @@
+import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
+
 export default function FinalCTA() {
   return (
     <section
@@ -43,10 +45,10 @@ export default function FinalCTA() {
           <a href="#waitlist" className="btn-gold">
             Lista de Espera
           </a>
-          <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
             Grupo WhatsApp
           </a>
-          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="btn-outline-neutral">
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-neutral">
             Instagram
           </a>
         </div>

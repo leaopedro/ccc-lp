@@ -96,7 +96,7 @@ export const footerLinks = {
   ],
   conecte: [
     { href: '#waitlist', label: 'Lista de Espera' },
-    { href: 'https://wa.me/', label: 'WhatsApp', external: true },
-    { href: 'https://instagram.com/', label: 'Instagram', external: true },
+    { href: '/whatsapp', label: 'WhatsApp', external: true },
+    { href: '/instagram', label: 'Instagram', external: true },
   ],
 }

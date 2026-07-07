@@ -1,3 +1,5 @@
+import { WHATSAPP_URL } from '../lib/links'
+
 export default function Partners() {
   return (
     <section
@@ -44,7 +46,7 @@ export default function Partners() {
         </p>
 
         <a
-          href="https://wa.me/"
+          href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-outline-gold"

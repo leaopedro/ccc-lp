@@ -1,3 +1,5 @@
+import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
+
 export default function Hero() {
   return (
     <section
@@ -63,14 +65,14 @@ export default function Hero() {
             <a href="#waitlist" className="btn-gold">
               Entrar na Lista de Espera →
             </a>
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
               Grupo no WhatsApp
             </a>
           </div>
 
           <div className="hero-anim-4" style={{ display: 'flex', alignItems: 'center', gap: 22, marginTop: 34, flexWrap: 'wrap' }}>
             <a
-              href="https://instagram.com/"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontSize: 13, letterSpacing: '0.06em', color: '#a99f8d' }}
