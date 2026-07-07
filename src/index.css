@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #D4AF37;
+  --color-gold-bright: #E8C874;
+  --color-gold-deep: #B8912A;
+  --color-cream: #F2E8D8;
+  --color-ink: #0A0A0A;
+  --color-ink-2: #0d0d0d;
+  --color-body: #c7bfb1;
+  --color-muted: #a99f8d;
+
+  --font-jost: 'Jost', sans-serif;
+  --font-manrope: 'Manrope', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 82px;
+}
+
+body {
+  margin: 0;
+  background: #0A0A0A;
+  color: #c7bfb1;
+  font-family: 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: #D4AF37;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #E8C874;
+}
+
+::selection {
+  background: #D4AF37;
+  color: #0A0A0A;
+}
+
+input, select, textarea {
+  font-family: 'Manrope', sans-serif;
+}
+
+@keyframes heroUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-anim-0 { animation: heroUp 0.8s ease both; }
+.hero-anim-1 { animation: heroUp 0.8s ease 0.08s both; }
+.hero-anim-2 { animation: heroUp 0.8s ease 0.16s both; }
+.hero-anim-3 { animation: heroUp 0.8s ease 0.24s both; }
+.hero-anim-4 { animation: heroUp 0.8s ease 0.32s both; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.32em;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #D4AF37;
+}
+
+.eyebrow-line {
+  display: block;
+  width: 26px;
+  height: 1px;
+  background: #D4AF37;
+  flex-shrink: 0;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 32px;
+  background: linear-gradient(135deg, #E8C874, #D4AF37 55%, #B8912A);
+  color: #0A0A0A;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(212,175,55,0.22);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(212,175,55,0.32);
+  color: #0A0A0A;
+}
+
+.btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background: transparent;
+  border: 1px solid rgba(212,175,55,0.5);
+  color: #D4AF37;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 2px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+  background: rgba(212,175,55,0.08);
+  border-color: #D4AF37;
+  color: #D4AF37;
+}
+
+.btn-outline-neutral {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #F2E8D8;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 2px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-neutral:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+}
+
+.feature-card {
+  padding: 34px 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0));
+  border: 1px solid rgba(212,175,55,0.20);
+  border-radius: 4px;
+  transition: border-color 0.35s ease, transform 0.35s ease, background 0.35s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(212,175,55,0.55);
+  transform: translateY(-4px);
+  background: rgba(212,175,55,0.045);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+}
+
+.form-input {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  color: #F2E8D8;
+  font-size: 14.5px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: #D4AF37;
+}
+
+.form-input::placeholder {
+  color: #a99f8d;
+}
