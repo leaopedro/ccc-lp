@@ -1,26 +1,46 @@
 import { useState, useRef, type FormEvent } from 'react'
+import { submitToWaitlist } from '../lib/waitlist'
+
+type Status = 'idle' | 'loading' | 'success' | 'error'
+
+const labelStyle = {
+  fontFamily: "'Jost', sans-serif",
+  letterSpacing: '0.14em',
+  textTransform: 'uppercase' as const,
+  fontSize: 11,
+  color: '#D4AF37',
+}
 
 export default function WaitlistForm() {
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<Status>('idle')
   const [firstName, setFirstName] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
   const sectionRef = useRef<HTMLElement>(null)
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setStatus('loading')
+    setErrorMsg('')
+
     const form = e.currentTarget
-    const data = {
+    const entry = {
       nome: (form.elements.namedItem('nome') as HTMLInputElement).value,
       email: (form.elements.namedItem('email') as HTMLInputElement).value,
       whatsapp: (form.elements.namedItem('whatsapp') as HTMLInputElement).value,
       carro: (form.elements.namedItem('carro') as HTMLInputElement).value,
       interesse: (form.elements.namedItem('interesse') as HTMLSelectElement).value,
     }
-    console.log('CASA CAR CLUB — novo cadastro na lista de espera:', data)
-    const first = data.nome.trim().split(' ')[0] || ''
-    setFirstName(first)
-    setSubmitted(true)
-    const top = (sectionRef.current?.offsetTop ?? 0) - 70
-    window.scrollTo({ top, behavior: 'smooth' })
+
+    try {
+      await submitToWaitlist(entry)
+      setFirstName(entry.nome.trim().split(' ')[0] || '')
+      setStatus('success')
+      const top = (sectionRef.current?.offsetTop ?? 0) - 70
+      window.scrollTo({ top, behavior: 'smooth' })
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Erro ao enviar. Tente novamente.')
+      setStatus('error')
+    }
   }
 
   return (
@@ -58,7 +78,7 @@ export default function WaitlistForm() {
       </div>
 
       <div style={{ maxWidth: 640, margin: '0 auto' }}>
-        {submitted ? (
+        {status === 'success' ? (
           <div
             style={{
               textAlign: 'center',
@@ -123,37 +143,27 @@ export default function WaitlistForm() {
             }}
           >
             <label style={{ display: 'grid', gap: 8 }}>
-              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: '#D4AF37' }}>
-                Nome
-              </span>
+              <span style={labelStyle}>Nome</span>
               <input name="nome" type="text" required placeholder="Seu nome completo" className="form-input" />
             </label>
 
             <label style={{ display: 'grid', gap: 8 }}>
-              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: '#D4AF37' }}>
-                E-mail
-              </span>
+              <span style={labelStyle}>E-mail</span>
               <input name="email" type="email" required placeholder="voce@email.com" className="form-input" />
             </label>
 
             <label style={{ display: 'grid', gap: 8 }}>
-              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: '#D4AF37' }}>
-                WhatsApp
-              </span>
+              <span style={labelStyle}>WhatsApp</span>
               <input name="whatsapp" type="tel" required placeholder="(41) 90000-0000" className="form-input" />
             </label>
 
             <label style={{ display: 'grid', gap: 8 }}>
-              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: '#D4AF37' }}>
-                Carro / Projeto
-              </span>
+              <span style={labelStyle}>Carro / Projeto</span>
               <input name="carro" type="text" placeholder="Ex.: Golf GTI, projeto de restauro..." className="form-input" />
             </label>
 
             <label style={{ display: 'grid', gap: 8 }}>
-              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: '#D4AF37' }}>
-                Nível de interesse
-              </span>
+              <span style={labelStyle}>Nível de interesse</span>
               <select name="interesse" required className="form-input" style={{ appearance: 'none' }}>
                 <option value="membro">Quero me tornar membro</option>
                 <option value="evento">Quero visitar um evento</option>
@@ -162,8 +172,19 @@ export default function WaitlistForm() {
               </select>
             </label>
 
-            <button type="submit" className="btn-gold" style={{ marginTop: 6, justifyContent: 'center' }}>
-              Entrar na Lista de Espera
+            {status === 'error' && (
+              <p style={{ margin: 0, fontSize: 13.5, color: '#e07070', textAlign: 'center' }}>
+                {errorMsg}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="btn-gold"
+              disabled={status === 'loading'}
+              style={{ marginTop: 6, justifyContent: 'center', opacity: status === 'loading' ? 0.7 : 1 }}
+            >
+              {status === 'loading' ? 'Enviando...' : 'Entrar na Lista de Espera'}
             </button>
           </form>
         )}
