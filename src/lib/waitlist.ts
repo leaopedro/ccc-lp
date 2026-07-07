@@ -7,7 +7,7 @@ export interface WaitlistEntry {
 }
 
 // This is the only function the UI calls — the backend is swappable.
-export async function submitToWaitlist(entry: WaitlistEntry): Promise<void> {
+export async function submitToWaitlist(entry: Partial<WaitlistEntry>): Promise<void> {
   const res = await fetch('/api/waitlist', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

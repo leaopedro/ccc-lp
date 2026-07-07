@@ -17,36 +17,41 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const { nome, email, whatsapp, carro, interesse } = req.body as {
-    nome: string
-    email: string
-    whatsapp: string
+    nome?: string
+    email?: string
+    whatsapp?: string
     carro?: string
-    interesse: string
+    interesse?: string
   }
 
-  if (!nome || !email || !whatsapp || !interesse) {
+  if (!nome || !email) {
     return res.status(400).json({ error: 'Campos obrigatórios ausentes.' })
+  }
+
+  // Build properties dynamically — only include fields that were sent
+  type NotionProperties = Parameters<typeof notion.pages.create>[0]['properties']
+  const properties: NotionProperties = {
+    Nome: {
+      title: [{ text: { content: nome } }],
+    },
+    Email: {
+      email,
+    },
+  }
+
+  if (whatsapp) {
+    properties['PhoneNumber'] = { phone_number: whatsapp }
+  }
+  if (carro) {
+    properties['Car'] = { rich_text: [{ text: { content: carro } }] }
+  }
+  if (interesse) {
+    properties['Interest'] = { select: { name: INTERESSE_LABELS[interesse] ?? interesse } }
   }
 
   await notion.pages.create({
     parent: { database_id: DATABASE_ID },
-    properties: {
-      Nome: {
-        title: [{ text: { content: nome } }],
-      },
-      Email: {
-        email,
-      },
-      WhatsApp: {
-        rich_text: [{ text: { content: whatsapp } }],
-      },
-      Carro: {
-        rich_text: [{ text: { content: carro ?? '' } }],
-      },
-      Interesse: {
-        select: { name: INTERESSE_LABELS[interesse] ?? interesse },
-      },
-    },
+    properties,
   })
 
   return res.status(200).json({ ok: true })
