@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Concept from './components/Concept'
@@ -38,6 +39,7 @@ export default function App() {
       <WaitlistForm />
       <FinalCTA />
       <Footer />
+      <Analytics />
     </div>
   )
 }
