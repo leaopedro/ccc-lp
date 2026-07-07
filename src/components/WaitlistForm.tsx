@@ -78,6 +78,10 @@ export default function WaitlistForm() {
     e.preventDefault()
     const form = e.currentTarget
 
+    // Honeypot — bail silently if filled by a bot
+    const trap = (form.elements.namedItem('_trap') as HTMLInputElement)?.value
+    if (trap) return
+
     const values = {
       nome:      showNome      ? (form.elements.namedItem('nome')      as HTMLInputElement).value  : '',
       email:     showEmail     ? (form.elements.namedItem('email')     as HTMLInputElement).value  : '',
@@ -107,6 +111,8 @@ export default function WaitlistForm() {
     if (showWhatsapp)  entry.whatsapp  = values.whatsapp
     if (showCarro)     entry.carro     = values.carro.trim()
     if (showInteresse) entry.interesse = values.interesse
+
+    entry.consent_at = new Date().toISOString()
 
     try {
       await submitToWaitlist(entry as WaitlistEntry)
@@ -189,7 +195,7 @@ export default function WaitlistForm() {
           <form
             onSubmit={handleSubmit}
             noValidate
-            style={{
+            style={{ position: 'relative',
               display: 'grid', gap: 18,
               padding: 'clamp(28px,4vw,44px)',
               background: 'linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0))',
@@ -197,6 +203,16 @@ export default function WaitlistForm() {
               borderRadius: 6,
             }}
           >
+            {/* Honeypot — invisible to real users */}
+            <input
+              type="text"
+              name="_trap"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}
+            />
+
             {showNome && (
               <label style={{ display: 'grid', gap: 8 }}>
                 <span style={labelStyle}>Nome</span>
@@ -282,6 +298,10 @@ export default function WaitlistForm() {
             >
               {status === 'loading' ? 'Enviando...' : 'Entrar na Lista de Espera'}
             </button>
+
+            <p style={{ margin: '12px 0 0', fontSize: 12, lineHeight: 1.6, color: '#a99f8d', textAlign: 'center' }}>
+              Ao enviar, você concorda em receber contato do CASA CAR CLUB. Seus dados são tratados conforme a LGPD.
+            </p>
           </form>
         )}
       </div>

@@ -4,6 +4,7 @@ export interface WaitlistEntry {
   whatsapp: string
   carro: string
   interesse: string
+  consent_at?: string
 }
 
 // This is the only function the UI calls — the backend is swappable.
