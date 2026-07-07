@@ -42,15 +42,12 @@ export default function Concept() {
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 44, flexWrap: 'wrap', alignItems: 'center' }}>
           {['Garagem', 'Cultura', 'Eventos', 'Comunidade'].map((word, i) => (
-            <>
-              <span
-                key={word}
-                style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.2em', fontSize: 12, color: '#a99f8d', textTransform: 'uppercase' }}
-              >
+            <span key={word} style={{ display: 'inline-flex', alignItems: 'center', gap: 16 }}>
+              <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.2em', fontSize: 12, color: '#a99f8d', textTransform: 'uppercase' }}>
                 {word}
               </span>
-              {i < 3 && <span key={`sep-${i}`} style={{ color: '#D4AF37' }}>✦</span>}
-            </>
+              {i < 3 && <span style={{ color: '#D4AF37' }}>✦</span>}
+            </span>
           ))}
         </div>
       </div>
