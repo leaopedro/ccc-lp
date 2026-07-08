@@ -1,7 +1,7 @@
 import { useState, useRef, type FormEvent, type ChangeEvent } from 'react'
 import { submitToWaitlist, type WaitlistEntry } from '../lib/waitlist'
 import { isDisabled } from '../lib/formConfig'
-import { WHATSAPP_URL } from '../lib/links'
+import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -189,6 +189,22 @@ export default function WaitlistForm() {
             </p>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold" style={{ marginTop: 26 }}>
               Entrar no Grupo WhatsApp
+            </a>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9,
+                marginTop: 18, fontSize: 13, letterSpacing: '0.06em', color: '#a99f8d',
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              Acompanhar no Instagram
             </a>
           </div>
         ) : (
