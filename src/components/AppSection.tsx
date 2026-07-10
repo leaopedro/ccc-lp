@@ -1,4 +1,5 @@
 import { appFeatures } from '../data/content'
+import LazyAppPreview from './app-preview/LazyAppPreview'
 
 export default function AppSection() {
   return (
@@ -52,12 +53,30 @@ export default function AppSection() {
             </div>
           </div>
 
-          <div style={{ position: 'relative' }}>
-            <img
-              src="/assets/app-screens.png"
-              alt="Aplicativo Casa Car Club"
-              style={{ width: '100%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.7))' }}
-            />
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22 }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 9,
+                padding: '9px 16px',
+                border: '1px solid rgba(212,175,55,0.4)',
+                borderRadius: 100,
+                background: 'rgba(212,175,55,0.06)',
+              }}
+            >
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#5FD08A', boxShadow: '0 0 9px #5FD08A', animation: 'ccPulse 2s ease-in-out infinite' }} />
+              <span style={{ fontFamily: "'Jost', sans-serif", fontSize: 11.5, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D4AF37' }}>
+                Protótipo interativo · toque para explorar
+              </span>
+            </div>
+
+            <LazyAppPreview />
+
+            <p style={{ margin: 0, textAlign: 'center', maxWidth: 360, fontSize: 12.5, lineHeight: 1.65, color: '#a99f8d' }}>
+              Navegue pelas telas e abas tocando na barra inferior. Esta é uma versão preliminar para
+              demonstração: o app final ainda está em desenvolvimento.
+            </p>
           </div>
         </div>
       </div>
