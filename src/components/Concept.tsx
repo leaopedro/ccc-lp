@@ -21,9 +21,9 @@ export default function Concept() {
             lineHeight: 1.12,
           }}
         >
-          Não é oficina. Não é só um bar.
+          Curitiba nunca teve
           <br />
-          <span style={{ color: '#D4AF37', fontWeight: 400 }}>É um car club.</span>
+          <span style={{ color: '#D4AF37', fontWeight: 400 }}>um clube assim.</span>
         </h2>
 
         <p
@@ -35,9 +35,8 @@ export default function Concept() {
             color: '#c7bfb1',
           }}
         >
-          O CASA CAR CLUB é um espaço privado feito para apaixonados por carros se encontrarem, criarem,
-          celebrarem, trabalharem em projetos, participarem de eventos exclusivos e se conectarem com marcas
-          e outros membros.
+          Um espaço privado feito para apaixonados por carro se encontrarem, criarem, tocarem seus projetos,
+          viverem eventos exclusivos e se conectarem com marcas e outros membros.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 44, flexWrap: 'wrap', alignItems: 'center' }}>

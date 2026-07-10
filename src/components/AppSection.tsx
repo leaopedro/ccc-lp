@@ -30,10 +30,11 @@ export default function AppSection() {
                 lineHeight: 1.12,
               }}
             >
-              Membership, eventos e acesso: tudo em um app.
+              Todo o clube{' '}
+              <span style={{ color: '#D4AF37', fontWeight: 400 }}>na palma da mão.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 500 }}>
-              O clube vai ter seu próprio aplicativo, feito para viver a experiência CASA CAR CLUB do bolso.
+              O CASA CAR CLUB vai ter seu próprio app, pra você viver a experiência do clube de onde estiver.
             </p>
             <div
               style={{

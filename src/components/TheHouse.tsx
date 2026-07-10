@@ -36,11 +36,12 @@ export default function TheHouse() {
                 lineHeight: 1.12,
               }}
             >
-              Uma casa de verdade sendo transformada no clubhouse automotivo privado de Curitiba.
+              Trocamos a sala de estar{' '}
+              <span style={{ color: '#D4AF37', fontWeight: 400 }}>por um lounge automotivo.</span>
             </h2>
             <p style={{ margin: '26px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
-              Cada ambiente foi pensado para viver carros de um jeito diferente: do café à garagem,
-              do estúdio ao churrasco. Espaço para carros, conteúdo e comunidade.
+              Uma casa de verdade em Curitiba, reformada de cima a baixo pra virar clubhouse.
+              Do café à garagem, do estúdio ao churrasco: cada canto foi pensado pra viver carro.
             </p>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
               {houseFeatures.map((item) => (

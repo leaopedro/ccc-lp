@@ -43,8 +43,8 @@ export default function Hero() {
               letterSpacing: '-0.01em',
             }}
           >
-            Curitiba ganha uma nova{' '}
-            <span style={{ color: '#D4AF37', fontWeight: 400 }}>casa para quem vive carros.</span>
+            O ponto de encontro{' '}
+            <span style={{ color: '#D4AF37', fontWeight: 400 }}>de quem vive carro.</span>
           </h1>
 
           <p
@@ -57,8 +57,8 @@ export default function Hero() {
               color: '#c7bfb1',
             }}
           >
-            Um clubhouse automotivo privado com eventos, lounge, media hub, detailing, bar &amp; café,
-            simulador e uma comunidade construída em torno da cultura automotiva.
+            Um clubhouse automotivo privado em Curitiba, com lounge, oficina, media hub, simuladores,
+            bar &amp; café, eventos e uma comunidade que respira cultura automotiva.
           </p>
 
           <div className="hero-anim-3" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 38 }}>

@@ -40,9 +40,8 @@ export default function Partners() {
         </h2>
 
         <p style={{ margin: '26px auto 34px', maxWidth: 600, fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1' }}>
-          O CASA CAR CLUB abre espaço para marcas automotivas, empresas de detailing, oficinas,
-          criadores, cafés, marcas de lifestyle e negócios locais se conectarem com uma comunidade
-          automotiva qualificada.
+          O CASA CAR CLUB abre espaço para marcas, empresas, oficinas, criadores e negócios locais
+          se conectarem com uma comunidade automotiva qualificada.
         </p>
 
         <a
