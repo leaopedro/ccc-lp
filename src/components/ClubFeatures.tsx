@@ -42,7 +42,7 @@ export default function ClubFeatures() {
             </h2>
           </div>
           <p style={{ margin: 0, maxWidth: 360, fontSize: 14.5, lineHeight: 1.7, color: '#a99f8d' }}>
-            Tudo em um só endereço — pensado para quem leva a paixão automotiva a sério.
+            Tudo em um só endereço, pensado para quem leva a paixão automotiva a sério.
           </p>
         </div>
 

@@ -39,7 +39,7 @@ export default function TheHouse() {
               Uma casa de verdade sendo transformada no clubhouse automotivo privado de Curitiba.
             </h2>
             <p style={{ margin: '26px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
-              Cada ambiente foi pensado para viver carros de um jeito diferente — do café à garagem,
+              Cada ambiente foi pensado para viver carros de um jeito diferente: do café à garagem,
               do estúdio ao churrasco. Espaço para carros, conteúdo e comunidade.
             </p>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
