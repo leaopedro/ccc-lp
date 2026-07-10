@@ -44,7 +44,7 @@ export default function Hero() {
             }}
           >
             O ponto de encontro{' '}
-            <span style={{ color: '#D4AF37', fontWeight: 400 }}>de quem vive carro.</span>
+            <span style={{ color: '#D4AF37', fontWeight: 400 }}>de quem vive carros.</span>
           </h1>
 
           <p

@@ -41,7 +41,7 @@ export default function TheHouse() {
             </h2>
             <p style={{ margin: '26px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
               Uma casa de verdade em Curitiba, reformada de cima a baixo pra virar clubhouse.
-              Do café à garagem, do estúdio ao churrasco: cada canto foi pensado pra viver carro.
+              Do café à garagem, do estúdio ao churrasco: cada canto foi pensado pra viver carros.
             </p>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
               {houseFeatures.map((item) => (

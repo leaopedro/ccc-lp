@@ -41,7 +41,9 @@ export default function Partners() {
 
         <p style={{ margin: '26px auto 34px', maxWidth: 600, fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1' }}>
           O CASA CAR CLUB abre espaço para marcas, empresas, oficinas, criadores e negócios locais
-          se conectarem com uma comunidade automotiva qualificada.
+          se conectarem com uma comunidade automotiva qualificada. A casa tem estrutura para criar
+          diferentes momentos e experiências que aproximam as pessoas do seu projeto, com campanhas
+          e ativações desenvolvidas sob medida para cada parceiro.
         </p>
 
         <a

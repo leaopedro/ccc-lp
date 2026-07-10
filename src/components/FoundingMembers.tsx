@@ -34,13 +34,12 @@ export default function FoundingMembers() {
                 lineHeight: 1.1,
               }}
             >
-              Torne-se um{' '}
-              <span style={{ color: '#D4AF37', fontWeight: 400 }}>Founding Member</span>
+              Seja um dos{' '}
+              <span style={{ color: '#D4AF37', fontWeight: 400 }}>primeiros nomes do clube.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
-              Os membros fundadores entram antes de todo mundo, com preço especial de lançamento,
-              prioridade em reservas, convite para o evento de abertura e o nome ligado ao primeiro
-              capítulo do clube.
+              Founding member é quem vai poder dizer "eu tava lá quando tudo era mato",
+              e ainda leva vantagem por ter chegado antes de todo mundo.
             </p>
             <ul style={{ listStyle: 'none', margin: '0 0 34px', padding: 0, display: 'grid', gap: 15 }}>
               {memberBenefits.map((benefit) => (

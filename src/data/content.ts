@@ -71,11 +71,11 @@ export const houseFeatures = [
 ]
 
 export const memberBenefits = [
-  'Acesso antecipado antes do lançamento público',
-  'Preço especial de lançamento',
+  'Entra antes de todo mundo',
+  'Preço de fundador (não volta)',
   'Prioridade em eventos e reservas',
-  'Convite para os eventos preview',
-  'Acesso ao grupo privado no WhatsApp',
+  'Convite pros eventos de pré-abertura',
+  'Acesso ao grupo fechado no WhatsApp',
 ]
 
 export const appFeatures = [
