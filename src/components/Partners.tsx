@@ -1,4 +1,4 @@
-import { WHATSAPP_URL } from '../lib/links'
+import { COMMERCIAL_EMAIL } from '../lib/links'
 
 export default function Partners() {
   return (
@@ -46,13 +46,8 @@ export default function Partners() {
           e ativações desenvolvidas sob medida para cada parceiro.
         </p>
 
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-outline-gold"
-        >
-          Falar no WhatsApp
+        <a href={`mailto:${COMMERCIAL_EMAIL}`} className="btn-outline-gold">
+          Falar com o Comercial
         </a>
       </div>
     </section>
