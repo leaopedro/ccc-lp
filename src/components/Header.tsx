@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { navLinks } from '../data/content'
 
 export default function Header() {
-  const [wide, setWide] = useState(() => window.innerWidth >= 880)
+  // Default to the desktop layout so build-time (SSG) rendering never touches
+  // `window`; the real value is resolved on mount in the effect below.
+  const [wide, setWide] = useState(true)
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 880px)')
+    setWide(mq.matches)
     const fn = (e: MediaQueryListEvent) => setWide(e.matches)
     mq.addEventListener('change', fn)
     return () => mq.removeEventListener('change', fn)

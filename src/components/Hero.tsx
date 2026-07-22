@@ -10,7 +10,7 @@ export default function Hero() {
         display: 'flex',
         alignItems: 'center',
         padding: '120px clamp(20px,5vw,56px) 80px',
-        backgroundImage: 'url(/assets/hero-house.png)',
+        backgroundImage: 'url(/assets/hero-house.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

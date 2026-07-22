@@ -7,7 +7,7 @@ export default function Partners() {
       style={{
         position: 'relative',
         padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)',
-        backgroundImage: 'url(/assets/applications.png)',
+        backgroundImage: 'url(/assets/applications.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

@@ -1,9 +1,9 @@
 import { houseFeatures } from '../data/content'
 
 const galleryItems = [
-  { src: '/assets/bar-cafe.png', alt: 'Bar e café', caption: 'Bar & Café' },
-  { src: '/assets/media-hub.png', alt: 'Media hub', caption: 'Media Hub & Estúdio' },
-  { src: '/assets/event-hall.png', alt: 'Salão de eventos', caption: 'Salão & Simulador' },
+  { src: '/assets/bar-cafe.webp', alt: 'Bar e café', caption: 'Bar & Café' },
+  { src: '/assets/media-hub.webp', alt: 'Media hub', caption: 'Media Hub & Estúdio' },
+  { src: '/assets/event-hall.webp', alt: 'Salão de eventos', caption: 'Salão & Simulador' },
 ]
 
 export default function TheHouse() {
@@ -62,7 +62,7 @@ export default function TheHouse() {
               boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
             }}
           >
-            <img src="/assets/hero-house.png" alt="Fachada Casa Car Club" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="/assets/hero-house.webp" alt="Fachada Casa Car Club" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
 

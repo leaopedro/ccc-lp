@@ -7,7 +7,7 @@ export default function FinalCTA() {
       style={{
         position: 'relative',
         padding: 'clamp(90px,13vw,170px) clamp(20px,5vw,56px)',
-        backgroundImage: 'url(/assets/event-hall.png)',
+        backgroundImage: 'url(/assets/event-hall.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

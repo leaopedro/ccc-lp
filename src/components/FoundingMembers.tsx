@@ -79,7 +79,7 @@ export default function FoundingMembers() {
               boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
             }}
           >
-            <img src="/assets/member-cards.png" alt="Cartões de membro Casa Car Club" style={{ width: '100%', display: 'block' }} />
+            <img src="/assets/member-cards.webp" alt="Cartões de membro Casa Car Club" style={{ width: '100%', display: 'block' }} />
           </div>
         </div>
       </div>

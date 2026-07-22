@@ -29,15 +29,17 @@ export default function App() {
         }}
       />
       <Header />
-      <Hero />
-      <Concept />
-      <ClubFeatures />
-      <TheHouse />
-      <FoundingMembers />
-      <Partners />
-      <AppSection />
-      <WaitlistForm />
-      <FinalCTA />
+      <main>
+        <Hero />
+        <Concept />
+        <ClubFeatures />
+        <TheHouse />
+        <FoundingMembers />
+        <Partners />
+        <AppSection />
+        <WaitlistForm />
+        <FinalCTA />
+      </main>
       <Footer />
       <Analytics />
     </div>

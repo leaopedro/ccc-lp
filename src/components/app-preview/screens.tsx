@@ -8,10 +8,10 @@ import { GOLD, CREAM, GOLD_CTA, dim, type AppNav } from './types'
 const IMG = {
   lockup: '/assets/app/lockup-cream.png',
   badge: '/assets/app/badge-gold.png',
-  hero: '/assets/hero-house.png',
-  event: '/assets/event-hall.png',
-  media: '/assets/media-hub.png',
-  barCafe: '/assets/bar-cafe.png',
+  hero: '/assets/hero-house.webp',
+  event: '/assets/event-hall.webp',
+  media: '/assets/media-hub.webp',
+  barCafe: '/assets/bar-cafe.webp',
   carGtr: '/assets/app/car-gtr.png',
   carM3: '/assets/app/car-m3.png',
 }

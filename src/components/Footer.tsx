@@ -33,7 +33,7 @@ export default function Footer() {
 
           <div style={{ display: 'flex', gap: 'clamp(40px,7vw,90px)', flexWrap: 'wrap' }}>
             <div>
-              <h4
+              <h3
                 style={{
                   margin: '0 0 16px',
                   fontFamily: "'Jost', sans-serif",
@@ -44,7 +44,7 @@ export default function Footer() {
                 }}
               >
                 Navegue
-              </h4>
+              </h3>
               <div style={{ display: 'grid', gap: 11 }}>
                 {footerLinks.navegue.map((link) => (
                   <a key={link.href} href={link.href} style={{ fontSize: 13.5, color: '#c7bfb1' }}>
@@ -54,7 +54,7 @@ export default function Footer() {
               </div>
             </div>
             <div>
-              <h4
+              <h3
                 style={{
                   margin: '0 0 16px',
                   fontFamily: "'Jost', sans-serif",
@@ -65,7 +65,7 @@ export default function Footer() {
                 }}
               >
                 Conecte-se
-              </h4>
+              </h3>
               <div style={{ display: 'grid', gap: 11 }}>
                 {footerLinks.conecte.map((link) => (
                   <a

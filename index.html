@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CASA CAR CLUB Curitiba — Clube automotivo privado</title>
     <meta name="description" content="Um clubhouse automotivo privado com eventos, lounge, media hub, detailing, bar &amp; café, simulador e uma comunidade construída em torno da cultura automotiva." />
+    <link rel="canonical" href="https://casacar.club/" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -15,20 +16,66 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://casacar.club" />
+    <meta property="og:url" content="https://casacar.club/" />
+    <meta property="og:site_name" content="CASA CAR CLUB Curitiba" />
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content="CASA CAR CLUB Curitiba — Clube automotivo privado" />
     <meta property="og:description" content="Um clubhouse automotivo privado com eventos, lounge, media hub, detailing, bar &amp; café, simulador e uma comunidade construída em torno da cultura automotiva." />
-    <meta property="og:image" content="https://casacar.club/appicon-badge-512.png" />
+    <meta property="og:image" content="https://casacar.club/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fachada da Casa Car Club, clube automotivo privado em Curitiba." />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="CASA CAR CLUB Curitiba — Clube automotivo privado" />
     <meta name="twitter:description" content="Um clubhouse automotivo privado com eventos, lounge, media hub, detailing, bar &amp; café, simulador e uma comunidade construída em torno da cultura automotiva." />
-    <meta name="twitter:image" content="https://casacar.club/appicon-badge-512.png" />
+    <meta name="twitter:image" content="https://casacar.club/og-cover.jpg" />
+    <meta name="twitter:image:alt" content="Fachada da Casa Car Club, clube automotivo privado em Curitiba." />
+
+    <!-- Preload the hero (LCP) image -->
+    <link rel="preload" as="image" href="/assets/hero-house.webp" fetchpriority="high" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&family=Lato:wght@300;400;700;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://casacar.club/#organization",
+            "name": "CASA CAR CLUB Curitiba",
+            "alternateName": "Casa Car Club",
+            "url": "https://casacar.club/",
+            "logo": "https://casacar.club/appicon-c-512.png",
+            "image": "https://casacar.club/og-cover.jpg",
+            "description": "Um clubhouse automotivo privado em Curitiba, com lounge, oficina, media hub, simuladores, bar & café, eventos e uma comunidade que respira cultura automotiva.",
+            "email": "comercial@casacar.club",
+            "areaServed": {
+              "@type": "City",
+              "name": "Curitiba",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Paraná"
+              }
+            },
+            "sameAs": ["https://www.instagram.com/casacarclub"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://casacar.club/#website",
+            "url": "https://casacar.club/",
+            "name": "CASA CAR CLUB Curitiba",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://casacar.club/#organization" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
