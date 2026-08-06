@@ -3,5 +3,11 @@
     { "source": "/whatsapp", "destination": "/api/whatsapp" },
     { "source": "/instagram", "destination": "/api/instagram" },
     { "source": "/privacidade", "destination": "/privacy" }
+  ],
+  "headers": [
+    {
+      "source": "/convite",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
   ]
 }
