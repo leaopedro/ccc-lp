@@ -95,8 +95,11 @@ export default function Footer() {
           <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.28em', fontSize: 11, color: '#D4AF37' }}>
             DRIVE · CONNECT · BELONG
           </span>
-          <span style={{ fontSize: 12, color: '#a99f8d' }}>
-            © 2026 CASA CAR CLUB Curitiba. Todos os direitos reservados.
+          <span style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', fontSize: 12, color: '#a99f8d' }}>
+            <a href="/privacy" style={{ fontSize: 12, color: '#a99f8d' }}>
+              Privacidade
+            </a>
+            <span>© 2026 CASA CAR CLUB Curitiba. Todos os direitos reservados.</span>
           </span>
         </div>
       </div>
