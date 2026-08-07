@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #D4AF37;
-  --color-gold-bright: #E8C874;
-  --color-gold-deep: #B8912A;
+  --color-gold: #C19A5C;
+  --color-gold-bright: #D4B584;
+  --color-gold-deep: #A5834A;
   --color-cream: #F2E8D8;
   --color-ink: #0A0A0A;
   --color-ink-2: #0d0d0d;
@@ -39,17 +39,17 @@ img {
 }
 
 a {
-  color: #D4AF37;
+  color: #C19A5C;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #E8C874;
+  color: #D4B584;
 }
 
 ::selection {
-  background: #D4AF37;
+  background: #C19A5C;
   color: #0A0A0A;
 }
 
@@ -76,14 +76,14 @@ input, select, textarea {
   letter-spacing: 0.32em;
   font-size: 11px;
   text-transform: uppercase;
-  color: #D4AF37;
+  color: #C19A5C;
 }
 
 .eyebrow-line {
   display: block;
   width: 26px;
   height: 1px;
-  background: #D4AF37;
+  background: #C19A5C;
   flex-shrink: 0;
 }
 
@@ -92,7 +92,7 @@ input, select, textarea {
   align-items: center;
   gap: 10px;
   padding: 17px 32px;
-  background: linear-gradient(135deg, #E8C874, #D4AF37 55%, #B8912A);
+  background: linear-gradient(135deg, #D4B584, #C19A5C 55%, #A5834A);
   color: #0A0A0A;
   font-family: 'Jost', sans-serif;
   font-weight: 600;
@@ -100,7 +100,7 @@ input, select, textarea {
   text-transform: uppercase;
   font-size: 13px;
   border-radius: 2px;
-  box-shadow: 0 8px 30px rgba(212,175,55,0.22);
+  box-shadow: 0 8px 30px rgba(193,154,92,0.22);
   border: none;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -108,7 +108,7 @@ input, select, textarea {
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(212,175,55,0.32);
+  box-shadow: 0 14px 40px rgba(193,154,92,0.32);
   color: #0A0A0A;
 }
 
@@ -118,8 +118,8 @@ input, select, textarea {
   gap: 10px;
   padding: 16px 30px;
   background: transparent;
-  border: 1px solid rgba(212,175,55,0.5);
-  color: #D4AF37;
+  border: 1px solid rgba(193,154,92,0.5);
+  color: #C19A5C;
   font-family: 'Jost', sans-serif;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -130,9 +130,9 @@ input, select, textarea {
 }
 
 .btn-outline-gold:hover {
-  background: rgba(212,175,55,0.08);
-  border-color: #D4AF37;
-  color: #D4AF37;
+  background: rgba(193,154,92,0.08);
+  border-color: #C19A5C;
+  color: #C19A5C;
 }
 
 .btn-outline-neutral {
@@ -153,22 +153,22 @@ input, select, textarea {
 }
 
 .btn-outline-neutral:hover {
-  border-color: #D4AF37;
-  color: #D4AF37;
+  border-color: #C19A5C;
+  color: #C19A5C;
 }
 
 .feature-card {
   padding: 34px 28px;
   background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0));
-  border: 1px solid rgba(212,175,55,0.20);
+  border: 1px solid rgba(193,154,92,0.20);
   border-radius: 4px;
   transition: border-color 0.35s ease, transform 0.35s ease, background 0.35s ease;
 }
 
 .feature-card:hover {
-  border-color: rgba(212,175,55,0.55);
+  border-color: rgba(193,154,92,0.55);
   transform: translateY(-4px);
-  background: rgba(212,175,55,0.045);
+  background: rgba(193,154,92,0.045);
 }
 
 .gallery-img {
@@ -195,7 +195,7 @@ input, select, textarea {
 }
 
 .form-input:focus {
-  border-color: #D4AF37;
+  border-color: #C19A5C;
 }
 
 .form-input::placeholder {

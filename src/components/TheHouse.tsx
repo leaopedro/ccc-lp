@@ -37,7 +37,7 @@ export default function TheHouse() {
               }}
             >
               Trocamos a sala de estar{' '}
-              <span style={{ color: '#D4AF37', fontWeight: 400 }}>por um lounge automotivo.</span>
+              <span style={{ color: '#D4B584', fontWeight: 400 }}>por um lounge automotivo.</span>
             </h2>
             <p style={{ margin: '26px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
               Uma casa de verdade em Curitiba, reformada de cima a baixo pra virar clubhouse.
@@ -46,7 +46,7 @@ export default function TheHouse() {
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 14 }}>
               {houseFeatures.map((item) => (
                 <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14.5, color: '#c7bfb1' }}>
-                  <span style={{ color: '#D4AF37' }}>✦</span>
+                  <span style={{ color: '#C19A5C' }}>✦</span>
                   {item}
                 </li>
               ))}
@@ -56,7 +56,7 @@ export default function TheHouse() {
           <div
             style={{
               position: 'relative',
-              border: '1px solid rgba(212,175,55,0.20)',
+              border: '1px solid rgba(193,154,92,0.20)',
               borderRadius: 6,
               overflow: 'hidden',
               boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
@@ -83,7 +83,7 @@ export default function TheHouse() {
                 position: 'relative',
                 borderRadius: 6,
                 overflow: 'hidden',
-                border: '1px solid rgba(212,175,55,0.20)',
+                border: '1px solid rgba(193,154,92,0.20)',
               }}
             >
               <img src={item.src} alt={item.alt} className="gallery-img" />

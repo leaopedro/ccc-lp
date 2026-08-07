@@ -25,8 +25,8 @@ export default function Hero() {
       <div style={{ position: 'relative', maxWidth: 1240, width: '100%', margin: '0 auto' }}>
         <div style={{ maxWidth: 720 }}>
           <div className="hero-anim-0" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 26 }}>
-            <span style={{ width: 34, height: 1, background: '#D4AF37', flexShrink: 0 }} />
-            <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.34em', fontSize: 11.5, textTransform: 'uppercase', color: '#D4AF37' }}>
+            <span style={{ width: 34, height: 1, background: '#C19A5C', flexShrink: 0 }} />
+            <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.34em', fontSize: 11.5, textTransform: 'uppercase', color: '#C19A5C' }}>
               Clube Automotivo Privado · Curitiba
             </span>
           </div>
@@ -44,7 +44,7 @@ export default function Hero() {
             }}
           >
             O ponto de encontro{' '}
-            <span style={{ color: '#D4AF37', fontWeight: 400 }}>de quem vive carros.</span>
+            <span style={{ color: '#D4B584', fontWeight: 400 }}>de quem vive carros.</span>
           </h1>
 
           <p
@@ -85,7 +85,7 @@ export default function Hero() {
               @{INSTAGRAM_HANDLE}
             </a>
             <span style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.15)' }} />
-            <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.24em', fontSize: 11, color: '#D4AF37' }}>
+            <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.24em', fontSize: 11, color: '#C19A5C' }}>
               DRIVE · CONNECT · BELONG
             </span>
           </div>

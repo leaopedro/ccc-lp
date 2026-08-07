@@ -21,7 +21,7 @@ export default function Footer() {
                 <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, letterSpacing: '0.26em', fontSize: 15, color: '#F2E8D8' }}>
                   CASA CAR CLUB
                 </span>
-                <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.42em', fontSize: 9.5, color: '#D4AF37' }}>
+                <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.42em', fontSize: 9.5, color: '#C19A5C' }}>
                   CURITIBA
                 </span>
               </span>
@@ -40,7 +40,7 @@ export default function Footer() {
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   fontSize: 11,
-                  color: '#D4AF37',
+                  color: '#C19A5C',
                 }}
               >
                 Navegue
@@ -61,7 +61,7 @@ export default function Footer() {
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   fontSize: 11,
-                  color: '#D4AF37',
+                  color: '#C19A5C',
                 }}
               >
                 Conecte-se
@@ -92,7 +92,7 @@ export default function Footer() {
             paddingTop: 26,
           }}
         >
-          <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.28em', fontSize: 11, color: '#D4AF37' }}>
+          <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.28em', fontSize: 11, color: '#C19A5C' }}>
             DRIVE · CONNECT · BELONG
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', fontSize: 12, color: '#a99f8d' }}>

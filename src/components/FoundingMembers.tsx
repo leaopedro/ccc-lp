@@ -35,7 +35,7 @@ export default function FoundingMembers() {
               }}
             >
               Seja um dos{' '}
-              <span style={{ color: '#D4AF37', fontWeight: 400 }}>primeiros nomes do clube.</span>
+              <span style={{ color: '#D4B584', fontWeight: 400 }}>primeiros nomes do clube.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
               Founding member é quem vai poder dizer "eu tava lá quando tudo era mato",
@@ -49,12 +49,12 @@ export default function FoundingMembers() {
                       flexShrink: 0,
                       width: 22,
                       height: 22,
-                      border: '1px solid #D4AF37',
+                      border: '1px solid #C19A5C',
                       borderRadius: '50%',
                       display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#D4AF37',
+                      color: '#C19A5C',
                       fontSize: 11,
                     }}
                   >
@@ -73,7 +73,7 @@ export default function FoundingMembers() {
             style={{
               order: 1,
               position: 'relative',
-              border: '1px solid rgba(212,175,55,0.20)',
+              border: '1px solid rgba(193,154,92,0.20)',
               borderRadius: 6,
               overflow: 'hidden',
               boxShadow: '0 30px 80px rgba(0,0,0,0.6)',

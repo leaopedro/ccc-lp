@@ -44,7 +44,7 @@ const labelStyle = {
   letterSpacing: '0.14em',
   textTransform: 'uppercase' as const,
   fontSize: 11,
-  color: '#D4AF37',
+  color: '#C19A5C',
 }
 
 const errorStyle = {
@@ -166,17 +166,17 @@ export default function WaitlistForm() {
             style={{
               textAlign: 'center',
               padding: '56px 32px',
-              border: '1px solid #D4AF37',
+              border: '1px solid #C19A5C',
               borderRadius: 6,
-              background: 'linear-gradient(180deg, rgba(212,175,55,0.06), rgba(255,255,255,0))',
+              background: 'linear-gradient(180deg, rgba(193,154,92,0.06), rgba(255,255,255,0))',
             }}
           >
             <div
               style={{
                 width: 64, height: 64, margin: '0 auto 22px',
-                border: '1px solid #D4AF37', borderRadius: '50%',
+                border: '1px solid #C19A5C', borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#D4AF37', fontSize: 26,
+                color: '#C19A5C', fontSize: 26,
               }}
             >
               ✓
@@ -215,7 +215,7 @@ export default function WaitlistForm() {
               display: 'grid', gap: 18,
               padding: 'clamp(28px,4vw,44px)',
               background: 'linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0))',
-              border: '1px solid rgba(212,175,55,0.20)',
+              border: '1px solid rgba(193,154,92,0.20)',
               borderRadius: 6,
             }}
           >

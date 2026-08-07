@@ -49,7 +49,7 @@ const labelStyle = {
   letterSpacing: '0.14em',
   textTransform: 'uppercase' as const,
   fontSize: 11,
-  color: '#D4AF37',
+  color: '#C19A5C',
 }
 
 const errorStyle = { fontSize: 12, color: '#e07070', marginTop: 4 }
@@ -144,7 +144,7 @@ export default function ConvitePage() {
           <div style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, letterSpacing: '0.28em', fontSize: 15, color: '#F2E8D8' }}>
             CASA CAR CLUB
           </div>
-          <div style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400, letterSpacing: '0.44em', fontSize: 9.5, color: '#D4AF37', marginTop: 3 }}>
+          <div style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400, letterSpacing: '0.44em', fontSize: 9.5, color: '#C19A5C', marginTop: 3 }}>
             CURITIBA
           </div>
         </div>
@@ -154,17 +154,17 @@ export default function ConvitePage() {
             style={{
               textAlign: 'center',
               padding: '56px 32px',
-              border: '1px solid #D4AF37',
+              border: '1px solid #C19A5C',
               borderRadius: 6,
-              background: 'linear-gradient(180deg, rgba(212,175,55,0.06), rgba(255,255,255,0))',
+              background: 'linear-gradient(180deg, rgba(193,154,92,0.06), rgba(255,255,255,0))',
             }}
           >
             <div
               style={{
                 width: 64, height: 64, margin: '0 auto 22px',
-                border: '1px solid #D4AF37', borderRadius: '50%',
+                border: '1px solid #C19A5C', borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#D4AF37', fontSize: 26,
+                color: '#C19A5C', fontSize: 26,
               }}
             >
               ✓
@@ -197,7 +197,7 @@ export default function ConvitePage() {
                 }}
               >
                 Seu projeto foi selecionado para representar a CASA no{' '}
-                <span style={{ color: '#D4AF37' }}>JDM Experience BBQ Edition</span>
+                <span style={{ color: '#C19A5C' }}>JDM Experience BBQ Edition</span>
               </h1>
               <p style={{ margin: 0, fontFamily: "'Jost', sans-serif", letterSpacing: '0.08em', fontSize: 15, color: '#c7bfb1' }}>
                 23 de Agosto · 12h
@@ -209,7 +209,7 @@ export default function ConvitePage() {
               style={{
                 marginBottom: 34,
                 padding: 'clamp(20px,4vw,26px)',
-                border: '1px solid rgba(212,175,55,0.14)',
+                border: '1px solid rgba(193,154,92,0.14)',
                 borderRadius: 6,
                 background: 'rgba(255,255,255,0.015)',
               }}
@@ -218,7 +218,7 @@ export default function ConvitePage() {
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 11 }}>
                 {BENEFITS.map((b) => (
                   <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 14.5, lineHeight: 1.5, color: '#c7bfb1' }}>
-                    <span style={{ color: '#D4AF37', flexShrink: 0 }}>◆</span>
+                    <span style={{ color: '#C19A5C', flexShrink: 0 }}>◆</span>
                     <span>{b}</span>
                   </li>
                 ))}
@@ -235,7 +235,7 @@ export default function ConvitePage() {
                 gap: 18,
                 padding: 'clamp(24px,4vw,36px)',
                 background: 'linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0))',
-                border: '1px solid rgba(212,175,55,0.20)',
+                border: '1px solid rgba(193,154,92,0.20)',
                 borderRadius: 6,
               }}
             >
@@ -313,8 +313,8 @@ export default function ConvitePage() {
                           fontSize: 15,
                           cursor: 'pointer',
                           borderRadius: 5,
-                          border: active ? '1px solid #D4AF37' : '1px solid rgba(212,175,55,0.22)',
-                          background: active ? 'linear-gradient(180deg, rgba(212,175,55,0.22), rgba(212,175,55,0.08))' : 'rgba(0,0,0,0.4)',
+                          border: active ? '1px solid #C19A5C' : '1px solid rgba(193,154,92,0.22)',
+                          background: active ? 'linear-gradient(180deg, rgba(193,154,92,0.22), rgba(193,154,92,0.08))' : 'rgba(0,0,0,0.4)',
                           color: active ? '#F2E8D8' : '#a99f8d',
                           transition: 'all 0.15s ease',
                         }}

@@ -32,7 +32,7 @@ export default function AppSection() {
               }}
             >
               Todo o clube{' '}
-              <span style={{ color: '#D4AF37', fontWeight: 400 }}>na palma da mão.</span>
+              <span style={{ color: '#D4B584', fontWeight: 400 }}>na palma da mão.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 500 }}>
               O CASA CAR CLUB vai ter seu próprio app, pra você viver a experiência do clube de onde estiver.
@@ -46,7 +46,7 @@ export default function AppSection() {
             >
               {appFeatures.map((feature) => (
                 <div key={feature} style={{ display: 'flex', alignItems: 'center', gap: 11, fontSize: 14, color: '#c7bfb1' }}>
-                  <span style={{ color: '#D4AF37', flexShrink: 0 }}>✦</span>
+                  <span style={{ color: '#C19A5C', flexShrink: 0 }}>✦</span>
                   {feature}
                 </div>
               ))}
@@ -60,13 +60,13 @@ export default function AppSection() {
                 alignItems: 'center',
                 gap: 9,
                 padding: '9px 16px',
-                border: '1px solid rgba(212,175,55,0.4)',
+                border: '1px solid rgba(193,154,92,0.4)',
                 borderRadius: 100,
-                background: 'rgba(212,175,55,0.06)',
+                background: 'rgba(193,154,92,0.06)',
               }}
             >
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#5FD08A', boxShadow: '0 0 9px #5FD08A', animation: 'ccPulse 2s ease-in-out infinite' }} />
-              <span style={{ fontFamily: "'Jost', sans-serif", fontSize: 11.5, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D4AF37' }}>
+              <span style={{ fontFamily: "'Jost', sans-serif", fontSize: 11.5, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C19A5C' }}>
                 Protótipo interativo · toque para explorar
               </span>
             </div>

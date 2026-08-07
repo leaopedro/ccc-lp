@@ -36,7 +36,7 @@ export default function FinalCTA() {
           }}
         >
           Esteja lá{' '}
-          <span style={{ color: '#D4AF37', fontWeight: 400 }}>antes de todo mundo.</span>
+          <span style={{ color: '#D4B584', fontWeight: 400 }}>antes de todo mundo.</span>
         </h2>
         <p style={{ margin: '24px auto 40px', maxWidth: 520, fontSize: 16, lineHeight: 1.7, color: '#c7bfb1' }}>
           O primeiro capítulo do CASA CAR CLUB Curitiba começa agora. Faça parte dele.

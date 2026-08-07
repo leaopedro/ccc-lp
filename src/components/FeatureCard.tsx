@@ -4,7 +4,7 @@ export default function FeatureCard({ title, description, iconSvg }: FeatureCard
   return (
     <article className="feature-card">
       <div
-        style={{ color: '#D4AF37', marginBottom: 18 }}
+        style={{ color: '#C19A5C', marginBottom: 18 }}
         dangerouslySetInnerHTML={{ __html: iconSvg }}
       />
       <h3

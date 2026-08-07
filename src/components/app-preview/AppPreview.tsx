@@ -126,7 +126,7 @@ export default function AppPreview() {
               style={{
                 flexShrink: 0,
                 height: 74,
-                borderTop: '1px solid rgba(212,175,55,.12)',
+                borderTop: '1px solid rgba(193,154,92,.12)',
                 background: '#0C0B09',
                 display: 'flex',
                 padding: '0 10px 16px',

@@ -29,7 +29,7 @@ export default function Header() {
         background: 'rgba(10,10,10,0.55)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
-        borderBottom: '1px solid rgba(212,175,55,0.12)',
+        borderBottom: '1px solid rgba(193,154,92,0.12)',
       }}
     >
       <a href="#inicio" style={{ display: 'flex', alignItems: 'center', gap: 13, color: 'inherit', flexShrink: 0 }}>
@@ -38,7 +38,7 @@ export default function Header() {
           <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, letterSpacing: '0.28em', fontSize: 14, color: '#F2E8D8' }}>
             CASA CAR CLUB
           </span>
-          <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400, letterSpacing: '0.44em', fontSize: 9, color: '#D4AF37' }}>
+          <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400, letterSpacing: '0.44em', fontSize: 9, color: '#C19A5C' }}>
             CURITIBA
           </span>
         </span>

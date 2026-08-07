@@ -42,7 +42,7 @@ export function HomeScreen({ nav }: { nav: AppNav }) {
           width: '100%',
           aspectRatio: '1',
           background: '#15120B',
-          border: '1px solid rgba(212,175,55,.15)',
+          border: '1px solid rgba(193,154,92,.15)',
           borderRadius: 14,
           display: 'flex',
           alignItems: 'center',
@@ -105,7 +105,7 @@ export function HomeScreen({ nav }: { nav: AppNav }) {
         style={{
           margin: '14px 16px 0',
           background: '#15120B',
-          border: '1px solid rgba(212,175,55,.2)',
+          border: '1px solid rgba(193,154,92,.2)',
           borderRadius: 17,
           padding: 15,
           cursor: 'pointer',
@@ -279,7 +279,7 @@ export function MembershipScreen({ nav }: { nav: AppNav }) {
         alignItems: 'center',
         gap: 13,
         padding: '13px 15px',
-        borderBottom: last ? 'none' : '1px solid rgba(212,175,55,.08)',
+        borderBottom: last ? 'none' : '1px solid rgba(193,154,92,.08)',
       }}
     >
       <Icon name={icon} size={20} color={GOLD} />
@@ -298,7 +298,7 @@ export function MembershipScreen({ nav }: { nav: AppNav }) {
         alignItems: 'center',
         gap: 12,
         padding: '11px 0',
-        borderBottom: '1px solid rgba(212,175,55,.08)',
+        borderBottom: '1px solid rgba(193,154,92,.08)',
         marginTop: 5,
       }}
     >
@@ -327,7 +327,7 @@ export function MembershipScreen({ nav }: { nav: AppNav }) {
           borderRadius: 18,
           padding: '20px 22px',
           background: 'radial-gradient(130% 100% at 80% 10%, #241f13 0%, #0d0b07 55%, #14110a 100%)',
-          border: '1px solid rgba(212,175,55,.38)',
+          border: '1px solid rgba(193,154,92,.38)',
           cursor: 'pointer',
         }}
       >
@@ -342,7 +342,7 @@ export function MembershipScreen({ nav }: { nav: AppNav }) {
             <div style={{ fontSize: 15, fontWeight: 600, color: GOLD, marginTop: 4 }}>2026</div>
           </div>
         </div>
-        <div style={{ height: 1, background: 'rgba(212,175,55,.2)', margin: '16px 0 11px' }} />
+        <div style={{ height: 1, background: 'rgba(193,154,92,.2)', margin: '16px 0 11px' }} />
         <div style={{ textAlign: 'center', fontSize: 9, fontWeight: 500, letterSpacing: '.3em', color: GOLD }}>
           DIRIGIR · CONECTAR · PERTENCER
         </div>
@@ -371,7 +371,7 @@ export function MembershipScreen({ nav }: { nav: AppNav }) {
           style={{
             marginTop: 11,
             background: '#100E09',
-            border: '1px solid rgba(212,175,55,.12)',
+            border: '1px solid rgba(193,154,92,.12)',
             borderRadius: 15,
             overflow: 'hidden',
           }}
@@ -418,14 +418,14 @@ export function CardScreen({ nav }: { nav: AppNav }) {
             borderRadius: 22,
             padding: '34px 26px',
             background: 'radial-gradient(130% 100% at 75% 12%, #241f13 0%, #0c0a06 58%, #15120a 100%)',
-            border: '1px solid rgba(212,175,55,.45)',
+            border: '1px solid rgba(193,154,92,.45)',
           }}
         >
-          <div style={{ position: 'absolute', inset: 9, border: '1px solid rgba(212,175,55,.22)', borderRadius: 15, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 9, border: '1px solid rgba(193,154,92,.22)', borderRadius: 15, pointerEvents: 'none' }} />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img src={IMG.badge} alt="CCC" style={{ width: 170, height: 170, objectFit: 'contain', display: 'block' }} />
           </div>
-          <div style={{ height: 1, background: 'rgba(212,175,55,.22)', margin: '20px 8px 14px' }} />
+          <div style={{ height: 1, background: 'rgba(193,154,92,.22)', margin: '20px 8px 14px' }} />
           <div style={{ textAlign: 'center', fontSize: 9, fontWeight: 500, letterSpacing: '.32em', color: GOLD }}>
             DIRIGIR · CONECTAR · PERTENCER
           </div>
@@ -471,7 +471,7 @@ export function CommunityScreen() {
     likes: number,
     comments: number,
   ) => (
-    <div style={{ background: '#0F0E0B', border: '1px solid rgba(212,175,55,.12)', borderRadius: 18, overflow: 'hidden' }}>
+    <div style={{ background: '#0F0E0B', border: '1px solid rgba(193,154,92,.12)', borderRadius: 18, overflow: 'hidden' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '13px 15px' }}>
         <div
           style={{
@@ -536,7 +536,7 @@ export function GarageScreen() {
         letterSpacing: '.1em',
         color: highlight ? GOLD : dim(0.6),
         background: '#15120B',
-        border: `1px solid rgba(212,175,55,${highlight ? '.2' : '.12'})`,
+        border: `1px solid rgba(193,154,92,${highlight ? '.2' : '.12'})`,
         padding: '5px 11px',
         borderRadius: 8,
       }}
@@ -546,7 +546,7 @@ export function GarageScreen() {
   )
 
   const car = (img: string, name: string, spec: string, chips: ReactNode) => (
-    <div style={{ background: '#0F0E0B', border: '1px solid rgba(212,175,55,.14)', borderRadius: 18, overflow: 'hidden' }}>
+    <div style={{ background: '#0F0E0B', border: '1px solid rgba(193,154,92,.14)', borderRadius: 18, overflow: 'hidden' }}>
       <div style={{ position: 'relative', width: '100%', height: 184 }}>
         <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
       </div>
@@ -585,7 +585,7 @@ export function GarageScreen() {
 
         <div
           style={{
-            border: '1px dashed rgba(212,175,55,.3)',
+            border: '1px dashed rgba(193,154,92,.3)',
             borderRadius: 18,
             padding: 20,
             display: 'flex',

@@ -7,9 +7,9 @@ export interface AppNav {
 }
 
 // ── Design tokens (shared across screens) ────────────────────────────────
-export const GOLD = '#D4AF37'
+export const GOLD = '#C19A5C'
 export const CREAM = '#F2E8D8'
-export const GOLD_CTA = 'linear-gradient(135deg,#E8CE86,#C9A227)'
+export const GOLD_CTA = 'linear-gradient(135deg,#D4B584,#A5834A)'
 
 /** Cream text at a given opacity — used for dimmed labels throughout the app. */
 export const dim = (o: number) => `rgba(242,232,216,${o})`

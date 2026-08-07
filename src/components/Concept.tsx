@@ -23,7 +23,7 @@ export default function Concept() {
         >
           Curitiba nunca teve
           <br />
-          <span style={{ color: '#D4AF37', fontWeight: 400 }}>um clube assim.</span>
+          <span style={{ color: '#D4B584', fontWeight: 400 }}>um clube assim.</span>
         </h2>
 
         <p
@@ -45,7 +45,7 @@ export default function Concept() {
               <span style={{ fontFamily: "'Jost', sans-serif", letterSpacing: '0.2em', fontSize: 12, color: '#a99f8d', textTransform: 'uppercase' }}>
                 {word}
               </span>
-              {i < 3 && <span style={{ color: '#D4AF37' }}>✦</span>}
+              {i < 3 && <span style={{ color: '#C19A5C' }}>✦</span>}
             </span>
           ))}
         </div>
