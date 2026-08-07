@@ -1,4 +1,5 @@
 import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
+import { track } from '../lib/analytics'
 
 export default function FinalCTA() {
   return (
@@ -7,7 +8,7 @@ export default function FinalCTA() {
       style={{
         position: 'relative',
         padding: 'clamp(90px,13vw,170px) clamp(20px,5vw,56px)',
-        backgroundImage: 'url(/assets/event-hall.webp)',
+        backgroundImage: 'url(/assets/lp/cta-bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -16,13 +17,16 @@ export default function FinalCTA() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(10,10,10,0.9), rgba(10,10,10,0.82))',
+          background: 'linear-gradient(180deg, rgba(10,10,10,0.92), rgba(10,10,10,0.86))',
         }}
       />
       <div style={{ position: 'relative', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
         <img
-          src="/assets/badge.png"
-          alt="Casa Car Club"
+          src="/assets/lp/seal.png"
+          alt=""
+          width={76}
+          height={76}
+          loading="lazy"
           style={{ width: 76, height: 76, borderRadius: '50%', margin: '0 auto 30px' }}
         />
         <h2
@@ -38,17 +42,17 @@ export default function FinalCTA() {
           Esteja lá{' '}
           <span style={{ color: '#D4B584', fontWeight: 400 }}>antes de todo mundo.</span>
         </h2>
-        <p style={{ margin: '24px auto 40px', maxWidth: 520, fontSize: 16, lineHeight: 1.7, color: '#c7bfb1' }}>
-          O primeiro capítulo do CASA CAR CLUB Curitiba começa agora. Faça parte dele.
+        <p style={{ margin: '24px auto 40px', maxWidth: 540, fontSize: 16, lineHeight: 1.7, color: '#c7bfb1' }}>
+          A CASA Box é a primeira forma de fazer parte.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
-          <a href="#waitlist" className="btn-gold">
-            Lista de Espera
+          <a href="#pre-venda" onClick={() => track('casa_box_preorder_cta_click')} className="btn-gold">
+            Acesso à pré-venda →
           </a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
+          <a href={WHATSAPP_URL} onClick={() => track('whatsapp_group_click')} className="btn-outline-gold">
             Grupo WhatsApp
           </a>
-          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-neutral">
+          <a href={INSTAGRAM_URL} className="btn-outline-neutral">
             Instagram
           </a>
         </div>

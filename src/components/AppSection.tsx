@@ -5,7 +5,12 @@ export default function AppSection() {
   return (
     <section
       id="app"
-      style={{ padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)', background: '#0A0A0A' }}
+      style={{
+        padding: 'clamp(72px,10vw,120px) clamp(20px,5vw,80px)',
+        background: '#0d0d0d',
+        borderTop: '1px solid rgba(193,154,92,0.13)',
+        borderBottom: '1px solid rgba(193,154,92,0.13)',
+      }}
     >
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div
@@ -35,7 +40,7 @@ export default function AppSection() {
               <span style={{ color: '#D4B584', fontWeight: 400 }}>na palma da mão.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 500 }}>
-              O CASA CAR CLUB vai ter seu próprio app, pra você viver a experiência do clube de onde estiver.
+              A CASA CAR CLUB vai ter seu próprio app, pra você viver a experiência do clube de onde estiver.
             </p>
             <div
               style={{

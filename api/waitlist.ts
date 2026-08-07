@@ -4,13 +4,6 @@ import { Client } from '@notionhq/client'
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 const DATABASE_ID = process.env.NOTION_DATABASE_ID ?? ''
 
-const INTERESSE_LABELS: Record<string, string> = {
-  membro: 'Quero me tornar membro',
-  evento: 'Quero visitar um evento',
-  parceiro: 'Quero ser parceiro / patrocinador',
-  acompanhar: 'Só quero acompanhar o projeto',
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
@@ -46,7 +39,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     properties['Car'] = { rich_text: [{ text: { content: carro } }] }
   }
   if (interesse) {
-    properties['Interest'] = { select: { name: INTERESSE_LABELS[interesse] ?? interesse } }
+    // Pass the tier value straight through; Notion auto-creates the select
+    // option on first use (e.g. bronze / prata / ouro).
+    properties['Interest'] = { select: { name: interesse } }
   }
 
   await notion.pages.create({

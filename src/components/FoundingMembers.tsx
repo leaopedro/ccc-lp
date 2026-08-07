@@ -1,14 +1,11 @@
 import { memberBenefits } from '../data/content'
+import { track } from '../lib/analytics'
 
 export default function FoundingMembers() {
   return (
     <section
       id="membros"
-      style={{
-        padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)',
-        background: '#0d0d0d',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
-      }}
+      style={{ padding: 'clamp(72px,10vw,124px) clamp(20px,5vw,80px)' }}
     >
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div
@@ -38,8 +35,8 @@ export default function FoundingMembers() {
               <span style={{ color: '#D4B584', fontWeight: 400 }}>primeiros nomes do clube.</span>
             </h2>
             <p style={{ margin: '24px 0 30px', fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1', maxWidth: 520 }}>
-              Founding member é quem vai poder dizer "eu tava lá quando tudo era mato",
-              e ainda leva vantagem por ter chegado antes de todo mundo.
+              Quem entra agora vai poder dizer "eu tava lá quando tudo era mato", e ainda leva vantagem
+              por ter chegado antes. Começa pela CASA Box Ouro.
             </p>
             <ul style={{ listStyle: 'none', margin: '0 0 34px', padding: 0, display: 'grid', gap: 15 }}>
               {memberBenefits.map((benefit) => (
@@ -64,22 +61,20 @@ export default function FoundingMembers() {
                 </li>
               ))}
             </ul>
-            <a href="#waitlist" className="btn-gold">
-              Entrar na Lista de Espera →
+            <a href="#pre-venda" onClick={() => track('casa_box_preorder_cta_click')} className="btn-gold" style={{ fontSize: 12.5 }}>
+              Garantir meu lugar →
             </a>
           </div>
 
-          <div
-            style={{
-              order: 1,
-              position: 'relative',
-              border: '1px solid rgba(193,154,92,0.20)',
-              borderRadius: 6,
-              overflow: 'hidden',
-              boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
-            }}
-          >
-            <img src="/assets/member-cards.webp" alt="Cartões de membro Casa Car Club" style={{ width: '100%', display: 'block' }} />
+          <div style={{ order: 1 }}>
+            <img
+              src="/assets/lp/tier-ouro.jpg"
+              alt="Kit CASA Box Ouro, com camiseta, cartão de founding member e adesivos."
+              width={1200}
+              height={1485}
+              loading="lazy"
+              style={{ width: '100%', height: 'auto', border: '1px solid rgba(193,154,92,0.2)', borderRadius: 4, boxShadow: '0 30px 80px rgba(0,0,0,0.6)' }}
+            />
           </div>
         </div>
       </div>

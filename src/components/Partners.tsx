@@ -7,7 +7,7 @@ export default function Partners() {
       style={{
         position: 'relative',
         padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)',
-        backgroundImage: 'url(/assets/applications.webp)',
+        backgroundImage: 'url(/assets/lp/parceiros-bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -36,18 +36,17 @@ export default function Partners() {
             lineHeight: 1.12,
           }}
         >
-          Seja parceiro do clube
+          Seja parceiro <span style={{ color: '#D4B584', fontWeight: 400 }}>do clube.</span>
         </h2>
 
-        <p style={{ margin: '26px auto 34px', maxWidth: 600, fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1' }}>
-          O CASA CAR CLUB abre espaço para marcas, empresas, oficinas, criadores e negócios locais
-          se conectarem com uma comunidade automotiva qualificada. A casa tem estrutura para criar
-          diferentes momentos e experiências que aproximam as pessoas do seu projeto, com campanhas
-          e ativações desenvolvidas sob medida para cada parceiro.
+        <p style={{ margin: '26px auto 34px', maxWidth: 620, fontSize: 15.5, lineHeight: 1.75, color: '#c7bfb1' }}>
+          A CASA conecta marcas à comunidade pela CASA Box, pelo Pocket CASA, por conteúdo e por
+          experiências feitas em parceria. Se a sua marca quer estar perto de um público automotivo
+          qualificado, a gente desenvolve o formato junto.
         </p>
 
         <a href={`mailto:${COMMERCIAL_EMAIL}`} className="btn-outline-gold">
-          Falar com o Comercial
+          Falar com o Comercial →
         </a>
       </div>
     </section>

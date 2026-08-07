@@ -1,82 +1,115 @@
-export interface FeatureCard {
+// ── Header / footer navigation ───────────────────────────────────────────
+
+export const navLinks = [
+  { href: '#o-casa', label: 'A CASA' },
+  { href: '#casa-box', label: 'CASA Box' },
+  { href: '#pocket-casa', label: 'Pocket CASA' },
+  { href: '#comunidade', label: 'Comunidade' },
+  { href: '#app', label: 'App' },
+  { href: '#visao-futura', label: 'Visão Futura' },
+]
+
+// The mobile menu shows the six nav links plus Parceiros.
+export const mobileNavLinks = [...navLinks, { href: '#parceiros', label: 'Parceiros' }]
+
+// ── Status strip (#o-casa) ────────────────────────────────────────────────
+
+export type StatusTone = 'active' | 'soon' | 'future'
+
+export interface StatusItem {
+  tone: StatusTone
+  label: string
   title: string
-  description: string
-  iconSvg: string
+  body: string
 }
 
-export const featureCards: FeatureCard[] = [
+export const statusItems: StatusItem[] = [
   {
-    title: 'Lounge dos Membros',
-    description: 'Sofás grandes, luz quente e um ambiente premium para relaxar e conectar.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M2 13a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4H2z"/><path d="M4 17v2M20 17v2"/></svg>`,
+    tone: 'active',
+    label: 'Já está acontecendo',
+    title: 'Comunidade e Pocket CASA',
+    body: 'Encontros, grupo ativo e um espaço da CASA dentro da Vortex Detail.',
   },
   {
-    title: 'Eventos Automotivos',
-    description: 'Encontros, viagens e experiências exclusivas para a comunidade.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18"/><path d="M5 4h12l-2.5 3.5L17 11H5"/></svg>`,
+    tone: 'soon',
+    label: 'Chegando em breve',
+    title: 'CASA Box e app MVP',
+    body: 'A assinatura entra em pré-venda e a primeira versão do app está pronta.',
   },
   {
-    title: 'Media Hub',
-    description: 'Estúdios, equipamentos e ilha de edição para criadores produzirem conteúdo de alto nível.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="14" height="11" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>`,
-  },
-  {
-    title: 'Detailing Bay',
-    description: 'Espaço dedicado ao cuidado, estética e proteção dos carros.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 5.5 6 9.5a6 6 0 0 1-12 0C6 8.5 12 3 12 3z"/></svg>`,
-  },
-  {
-    title: 'Oficina',
-    description: 'Todo o espaço e ferramentas necessários para cuidar das suas maiores conquistas: seu carro e as pessoas ao seu redor.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
-  },
-  {
-    title: 'Bar & Café',
-    description: 'Café especial, drinks e petiscos (liberados para membros) em um ambiente sofisticado.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h12v4a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8z"/><path d="M17 9h2.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v2M11 3v2M14 3v2"/></svg>`,
-  },
-  {
-    title: 'Simuladores',
-    description: 'Lan house de simuladores de corrida e drift em tela grande, pra galera pilotar junto.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 14.5V21M9.6 11L3.5 8.5M14.4 11l6.1-2.5"/></svg>`,
-  },
-  {
-    title: 'Área de Churrasco',
-    description: 'Espaço gourmet com sinuca para confraternizar entre família, amigos, boa comida e bons carros.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.2 2.5 3.5 3.4 3.5 6.5a3.5 3.5 0 0 1-7 0c0-1.4.7-2.3 1.5-3 0 1.6 2 1.6 2 0 0-1.2 0-2.4 0-3.5z"/><path d="M5 21h14"/></svg>`,
-  },
-  {
-    title: 'Espaço Kids',
-    description: 'Um cantinho pra criançada curtir carro junto com os pais e já crescer com as referências certas.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4 4 0 0 0 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>`,
-  },
-  {
-    title: 'Ativações de Marcas',
-    description: 'Espaços para marcas se conectarem com uma comunidade automotiva qualificada.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 6.8H21l-5.5 4 2.1 6.7L12 16.4 6.4 20.5l2.1-6.7L3 9.8h6.8L12 3z"/></svg>`,
-  },
-  {
-    title: 'App da Casa',
-    description: 'Eventos, reservas, ingressos, loja e membership: tudo na palma da mão.',
-    iconSvg: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg>`,
+    tone: 'future',
+    label: 'Visão futura',
+    title: 'Sede definitiva',
+    body: 'Uma sede própria para o clube. Ainda em projeto.',
   },
 ]
 
-export const houseFeatures = [
-  'Salão de eventos indoor',
-  'Área externa e jardim',
-  'Balcão de bar & café',
-  'Área de churrasco',
-  'Andar superior para mídia e reuniões',
+// ── CASA Box tiers (#casa-box) — no prices, by client decision ────────────
+
+export interface Tier {
+  name: string
+  image: string
+  alt: string
+  description: string
+  featured?: boolean
+  foundingLabel?: string
+}
+
+export const tiers: Tier[] = [
+  {
+    name: 'Bronze',
+    image: '/assets/lp/tier-bronze.jpg',
+    alt: 'CASA Box Bronze aberta, com adesivos, chaveiro, lanterna, flanela e necessaire.',
+    description: 'Cinco itens da CASA para usar no dia a dia com o seu carro.',
+  },
+  {
+    name: 'Prata',
+    image: '/assets/lp/tier-prata.jpg',
+    alt: 'CASA Box Prata aberta, com adesivos, chaveiro, flanela e necessaire.',
+    description: 'Tudo do Bronze, mais um item premium por mês.',
+  },
+  {
+    name: 'Ouro',
+    image: '/assets/lp/tier-ouro.jpg',
+    alt: 'CASA Box Ouro aberta, com camiseta, cartão de founding member, adesivos e chaveiro.',
+    description:
+      'A experiência completa, com personalização, itens exclusivos e benefícios de founding member.',
+    featured: true,
+    foundingLabel: 'Founding Member',
+  },
 ]
 
-export const memberBenefits = [
-  'Entra antes de todo mundo',
-  'Preço de fundador (não volta)',
-  'Prioridade em eventos e reservas',
-  'Convite pros eventos de pré-abertura',
-  'Acesso ao grupo fechado no WhatsApp',
+// Options for the pre-order form's tier select (no prices).
+export const tierOptions = [
+  { value: '', label: 'Ainda não sei' },
+  { value: 'bronze', label: 'Bronze' },
+  { value: 'prata', label: 'Prata' },
+  { value: 'ouro', label: 'Ouro / Founding Member' },
 ]
+
+// ── Pocket CASA (#pocket-casa) ────────────────────────────────────────────
+
+export const pocketPoints = [
+  'Dentro de um estúdio de detailing em operação.',
+  'Base dos encontros e do conteúdo da comunidade.',
+  'Um começo. A sede definitiva vem em outro momento.',
+]
+
+// ── Comunidade (#comunidade) — text-only by design, no photos ─────────────
+
+export interface CommunityCell {
+  label: string
+  line: string
+}
+
+export const communityCells: CommunityCell[] = [
+  { label: 'Grupo no WhatsApp', line: 'A conversa do clube, todo dia.' },
+  { label: 'Encontros', line: 'Marcados pela própria comunidade, em Curitiba.' },
+  { label: 'Vortex Detail', line: 'A parceria que abriga o Pocket CASA.' },
+  { label: 'Instagram', line: 'O registro do que já aconteceu.' },
+]
+
+// ── App (#app) — unchanged from the current site ──────────────────────────
 
 export const appFeatures = [
   'Acesso a eventos por QR code',
@@ -88,25 +121,38 @@ export const appFeatures = [
   'Reservas de espaços',
 ]
 
-export const navLinks = [
-  { href: '#conceito', label: 'Conceito' },
-  { href: '#clube', label: 'O Clube' },
-  { href: '#casa', label: 'A Casa' },
-  { href: '#membros', label: 'Membros' },
-  { href: '#app', label: 'App' },
+// ── Visão Futura (#visao-futura) — concept renders only ───────────────────
+
+export interface ConceptRender {
+  image: string
+  alt: string
+  caption: string
+}
+
+export const conceptRenders: ConceptRender[] = [
+  {
+    image: '/assets/lp/sede-01.webp',
+    alt: 'Imagem conceitual do exterior da futura sede da CASA CAR CLUB.',
+    caption: 'Exterior',
+  },
+  {
+    image: '/assets/lp/sede-02.webp',
+    alt: 'Imagem conceitual do lounge da futura sede da CASA CAR CLUB.',
+    caption: 'Lounge',
+  },
+  {
+    image: '/assets/lp/sede-03.webp',
+    alt: 'Imagem conceitual da garagem e área de mídia da futura sede da CASA CAR CLUB.',
+    caption: 'Garagem e mídia',
+  },
 ]
 
-export const footerLinks = {
-  navegue: [
-    { href: '#conceito', label: 'Conceito' },
-    { href: '#clube', label: 'O Clube' },
-    { href: '#casa', label: 'A Casa' },
-    { href: '#membros', label: 'Membros' },
-    { href: '#app', label: 'App' },
-  ],
-  conecte: [
-    { href: '#waitlist', label: 'Lista de Espera' },
-    { href: '/whatsapp', label: 'WhatsApp', external: true },
-    { href: '/instagram', label: 'Instagram', external: true },
-  ],
-}
+// ── Acesso Antecipado (#membros) ──────────────────────────────────────────
+
+export const memberBenefits = [
+  'Entra antes de todo mundo',
+  'Preço de fundador (não volta)',
+  'Prioridade nos encontros da comunidade',
+  'Itens exclusivos de série limitada',
+  'Acesso ao grupo fechado no WhatsApp',
+]

@@ -20,7 +20,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 82px;
+  scroll-padding-top: 84px;
 }
 
 body {
@@ -53,8 +53,26 @@ a:hover {
   color: #0A0A0A;
 }
 
+:focus-visible {
+  outline: 2px solid #C19A5C;
+  outline-offset: 3px;
+}
+
 input, select, textarea {
   font-family: 'Lato', sans-serif;
+}
+
+input::placeholder {
+  color: #7d7466;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 @keyframes heroUp {
@@ -199,7 +217,7 @@ input, select, textarea {
 }
 
 .form-input::placeholder {
-  color: #a99f8d;
+  color: #7d7466;
 }
 
 /* ── App preview (member-app prototype) ───────────────────────────────── */
@@ -241,3 +259,67 @@ input, select, textarea {
   50%  { opacity: 0.55; transform: scale(0.82); }
   100% { opacity: 1; transform: scale(1); }
 }
+
+/* ── Header / nav ──────────────────────────────────────────────────────── */
+.nav-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c7bfb1;
+  transition: color 0.3s ease;
+}
+.nav-link:hover { color: #C19A5C; }
+
+.menu-link {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(193,154,92,0.1);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F2E8D8;
+  transition: color 0.3s ease;
+}
+.menu-link:last-child { border-bottom: none; }
+.menu-link:hover { color: #C19A5C; }
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(193,154,92,0.28);
+  border-radius: 2px;
+  background: transparent;
+  color: #C19A5C;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.icon-btn:hover {
+  border-color: #C19A5C;
+  background: rgba(193,154,92,0.08);
+}
+
+/* ── CASA Box tier cards ───────────────────────────────────────────────── */
+.tier-card {
+  border: 1px solid rgba(193,154,92,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0));
+  transition: border-color 0.35s ease, transform 0.35s ease;
+}
+.tier-card:hover {
+  border-color: rgba(193,154,92,0.55);
+  transform: translateY(-4px);
+}
+.tier-card--featured {
+  border-color: rgba(193,154,92,0.45);
+  background: linear-gradient(180deg, rgba(193,154,92,0.07), rgba(255,255,255,0));
+}
+.tier-card--featured:hover { border-color: #C19A5C; }
+
+/* Muted link (footer, hero handle) — body colour that warms to gold */
+.link-muted { color: #a99f8d; transition: color 0.3s ease; }
+.link-muted:hover { color: #C19A5C; }

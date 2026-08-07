@@ -1,7 +1,8 @@
 import { useState, useRef, type FormEvent, type ChangeEvent } from 'react'
 import { submitToWaitlist, type WaitlistEntry } from '../lib/waitlist'
 import { isDisabled } from '../lib/formConfig'
-import { WHATSAPP_URL, INSTAGRAM_URL } from '../lib/links'
+import { tierOptions } from '../data/content'
+import { track } from '../lib/analytics'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -33,7 +34,7 @@ function validateEmail(v: string) {
 function validateWhatsApp(v: string) {
   if (!v.trim()) return 'WhatsApp é obrigatório.'
   const digits = v.replace(/\D/g, '')
-  if (digits.length < 10 || digits.length > 11) return 'Número incompleto. Ex: (41) 99999-9999'
+  if (digits.length < 10 || digits.length > 11) return 'Número incompleto. Ex: (41) 90000-0000'
   return ''
 }
 
@@ -41,15 +42,15 @@ function validateWhatsApp(v: string) {
 
 const labelStyle = {
   fontFamily: "'Jost', sans-serif",
-  letterSpacing: '0.14em',
+  letterSpacing: '0.2em',
   textTransform: 'uppercase' as const,
-  fontSize: 11,
-  color: '#C19A5C',
+  fontSize: 10.5,
+  color: '#a99f8d',
 }
 
 const errorStyle = {
   fontSize: 12,
-  color: '#e07070',
+  color: '#d98f6e',
   marginTop: 4,
 }
 
@@ -57,21 +58,19 @@ const errorStyle = {
 
 export default function WaitlistForm() {
   const [status, setStatus] = useState<Status>('idle')
-  const [firstName, setFirstName] = useState('')
   const [submitError, setSubmitError] = useState('')
   const [phone, setPhone] = useState('')
   const [errors, setErrors] = useState<Partial<Record<keyof WaitlistEntry, string>>>({})
   const sectionRef = useRef<HTMLElement>(null)
 
-  const showNome      = !isDisabled('nome')
-  const showEmail     = !isDisabled('email')
-  const showWhatsapp  = !isDisabled('whatsapp')
-  const showCarro     = !isDisabled('carro')
+  const showNome = !isDisabled('nome')
+  const showWhatsapp = !isDisabled('whatsapp')
+  const showEmail = !isDisabled('email')
   const showInteresse = !isDisabled('interesse')
 
   function handlePhoneChange(e: ChangeEvent<HTMLInputElement>) {
     setPhone(maskPhone(e.target.value))
-    if (errors.whatsapp) setErrors(prev => ({ ...prev, whatsapp: '' }))
+    if (errors.whatsapp) setErrors((prev) => ({ ...prev, whatsapp: '' }))
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -83,18 +82,17 @@ export default function WaitlistForm() {
     if (trap) return
 
     const values = {
-      nome:      showNome      ? (form.elements.namedItem('nome')      as HTMLInputElement).value  : '',
-      email:     showEmail     ? (form.elements.namedItem('email')     as HTMLInputElement).value  : '',
-      whatsapp:  showWhatsapp  ? phone                                                              : '',
-      carro:     showCarro     ? (form.elements.namedItem('carro')     as HTMLInputElement).value  : '',
+      nome: showNome ? (form.elements.namedItem('nome') as HTMLInputElement).value : '',
+      whatsapp: showWhatsapp ? phone : '',
+      email: showEmail ? (form.elements.namedItem('email') as HTMLInputElement).value : '',
       interesse: showInteresse ? (form.elements.namedItem('interesse') as HTMLSelectElement).value : '',
     }
 
     // Client-side validation
     const newErrors: typeof errors = {}
-    if (showNome)     newErrors.nome     = validateNome(values.nome)
-    if (showEmail)    newErrors.email    = validateEmail(values.email)
+    if (showNome) newErrors.nome = validateNome(values.nome)
     if (showWhatsapp) newErrors.whatsapp = validateWhatsApp(values.whatsapp)
+    if (showEmail) newErrors.email = validateEmail(values.email)
 
     if (Object.values(newErrors).some(Boolean)) {
       setErrors(newErrors)
@@ -104,19 +102,16 @@ export default function WaitlistForm() {
     setStatus('loading')
     setSubmitError('')
 
-    // Only send fields that are active
     const entry: Partial<WaitlistEntry> = {}
-    if (showNome)      entry.nome      = values.nome.trim()
-    if (showEmail)     entry.email     = values.email.trim()
-    if (showWhatsapp)  entry.whatsapp  = values.whatsapp
-    if (showCarro)     entry.carro     = values.carro.trim()
+    if (showNome) entry.nome = values.nome.trim()
+    if (showWhatsapp) entry.whatsapp = values.whatsapp
+    if (showEmail) entry.email = values.email.trim()
     if (showInteresse) entry.interesse = values.interesse
-
     entry.consent_at = new Date().toISOString()
 
     try {
       await submitToWaitlist(entry as WaitlistEntry)
-      setFirstName(values.nome.trim().split(' ')[0] || '')
+      track('casa_box_lead_submit', { tier: values.interesse || 'indefinido' })
       setStatus('success')
       const top = (sectionRef.current?.offsetTop ?? 0) - 70
       window.scrollTo({ top, behavior: 'smooth' })
@@ -128,96 +123,45 @@ export default function WaitlistForm() {
 
   return (
     <section
-      id="waitlist"
+      id="pre-venda"
       ref={sectionRef}
-      style={{
-        padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)',
-        background: '#0d0d0d',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
-        borderBottom: '1px solid rgba(255,255,255,0.04)',
-      }}
+      style={{ padding: 'clamp(72px,10vw,124px) clamp(20px,5vw,80px)' }}
     >
-      <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 22 }}>
-          <span className="eyebrow-line" />
-          <span className="eyebrow">Lista de Espera</span>
-          <span className="eyebrow-line" />
-        </div>
-        <h2
-          style={{
-            margin: '0 0 12px',
-            fontFamily: "'Jost', sans-serif",
-            fontWeight: 300,
-            color: '#F2E8D8',
-            fontSize: 'clamp(28px,4.2vw,48px)',
-            lineHeight: 1.12,
-          }}
-        >
-          Garanta seu lugar no clube
+      <div style={{ maxWidth: 720, margin: '0 auto' }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12, fontFamily: "'Jost', sans-serif", letterSpacing: '0.3em', fontSize: 11, textTransform: 'uppercase', color: '#C19A5C' }}>
+          <span aria-hidden="true" style={{ display: 'block', width: 26, height: 1, background: '#C19A5C' }} />
+          Pré-venda CASA Box
+        </span>
+        <h2 style={{ margin: '20px 0 0', fontFamily: "'Jost', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,4vw,44px)', lineHeight: 1.1, letterSpacing: '-0.015em', color: '#F2E8D8', textWrap: 'balance' }}>
+          Receba primeiro o acesso à pré-venda da CASA Box
         </h2>
-        <p style={{ margin: '0 auto 40px', maxWidth: 480, fontSize: 15, lineHeight: 1.7, color: '#a99f8d' }}>
-          Preencha os dados abaixo e entre para a lista dos primeiros membros do CASA CAR CLUB Curitiba.
+        <p style={{ margin: '18px 0 0', fontSize: 15.5, lineHeight: 1.6, color: '#a99f8d' }}>
+          Deixe seus dados e a gente avisa assim que abrir.
         </p>
-      </div>
 
-      <div style={{ maxWidth: 640, margin: '0 auto' }}>
         {status === 'success' ? (
           <div
+            role="status"
             style={{
-              textAlign: 'center',
-              padding: '56px 32px',
-              border: '1px solid #C19A5C',
-              borderRadius: 6,
-              background: 'linear-gradient(180deg, rgba(193,154,92,0.06), rgba(255,255,255,0))',
+              marginTop: 32,
+              padding: '28px 26px',
+              border: '1px solid rgba(193,154,92,0.45)',
+              borderRadius: 3,
+              background: 'rgba(193,154,92,0.06)',
             }}
           >
-            <div
-              style={{
-                width: 64, height: 64, margin: '0 auto 22px',
-                border: '1px solid #C19A5C', borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#C19A5C', fontSize: 26,
-              }}
-            >
-              ✓
-            </div>
-            <h3 style={{ margin: '0 0 10px', fontFamily: "'Jost', sans-serif", fontWeight: 400, letterSpacing: '0.06em', color: '#F2E8D8', fontSize: 24 }}>
-              Você está na lista{firstName ? `, ${firstName}` : ''}!
-            </h3>
-            <p style={{ margin: '0 auto', maxWidth: 400, fontSize: 14.5, lineHeight: 1.7, color: '#c7bfb1' }}>
-              Recebemos seu cadastro. Em breve entramos em contato com novidades e o convite para o grupo privado no WhatsApp.
+            <p style={{ margin: 0, fontFamily: "'Jost', sans-serif", fontSize: 18, color: '#F2E8D8' }}>
+              Pronto. Você está na lista.
             </p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-outline-gold" style={{ marginTop: 26 }}>
-              Entrar no Grupo WhatsApp
-            </a>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9,
-                marginTop: 18, fontSize: 13, letterSpacing: '0.06em', color: '#a99f8d',
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-              </svg>
-              Acompanhar no Instagram
-            </a>
+            <p style={{ margin: '8px 0 0', fontSize: 14.5, color: '#a99f8d' }}>
+              A gente avisa no WhatsApp assim que a pré-venda da CASA Box abrir.
+            </p>
           </div>
         ) : (
           <form
             onSubmit={handleSubmit}
             noValidate
-            style={{ position: 'relative',
-              display: 'grid', gap: 18,
-              padding: 'clamp(28px,4vw,44px)',
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0))',
-              border: '1px solid rgba(193,154,92,0.20)',
-              borderRadius: 6,
-            }}
+            style={{ marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}
           >
             {/* Honeypot — invisible to real users */}
             <input
@@ -230,43 +174,29 @@ export default function WaitlistForm() {
             />
 
             {showNome && (
-              <label style={{ display: 'grid', gap: 8 }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <span style={labelStyle}>Nome</span>
                 <input
                   name="nome"
                   type="text"
                   required
-                  placeholder="Seu nome completo"
+                  autoComplete="name"
                   className="form-input"
-                  onChange={() => setErrors(prev => ({ ...prev, nome: '' }))}
+                  onChange={() => setErrors((prev) => ({ ...prev, nome: '' }))}
                 />
                 {errors.nome && <span style={errorStyle}>{errors.nome}</span>}
               </label>
             )}
 
-            {showEmail && (
-              <label style={{ display: 'grid', gap: 8 }}>
-                <span style={labelStyle}>E-mail</span>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="voce@email.com"
-                  className="form-input"
-                  onChange={() => setErrors(prev => ({ ...prev, email: '' }))}
-                />
-                {errors.email && <span style={errorStyle}>{errors.email}</span>}
-              </label>
-            )}
-
             {showWhatsapp && (
-              <label style={{ display: 'grid', gap: 8 }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <span style={labelStyle}>WhatsApp</span>
                 <input
                   name="whatsapp"
                   type="tel"
                   required
-                  placeholder="(41) 99999-9999"
+                  autoComplete="tel"
+                  placeholder="(41) 90000-0000"
                   className="form-input"
                   value={phone}
                   onChange={handlePhoneChange}
@@ -276,48 +206,55 @@ export default function WaitlistForm() {
               </label>
             )}
 
-            {showCarro && (
-              <label style={{ display: 'grid', gap: 8 }}>
-                <span style={labelStyle}>Carro / Projeto</span>
+            {showEmail && (
+              <label style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                <span style={labelStyle}>E-mail</span>
                 <input
-                  name="carro"
-                  type="text"
-                  placeholder="Ex.: Golf GTI, projeto de restauro..."
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
                   className="form-input"
+                  onChange={() => setErrors((prev) => ({ ...prev, email: '' }))}
                 />
+                {errors.email && <span style={errorStyle}>{errors.email}</span>}
               </label>
             )}
 
             {showInteresse && (
-              <label style={{ display: 'grid', gap: 8 }}>
-                <span style={labelStyle}>Nível de interesse</span>
-                <select name="interesse" required className="form-input" style={{ appearance: 'none' }}>
-                  <option value="membro">Quero me tornar membro</option>
-                  <option value="evento">Quero visitar um evento</option>
-                  <option value="parceiro">Quero ser parceiro / patrocinador</option>
-                  <option value="acompanhar">Só quero acompanhar o projeto</option>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                <span style={labelStyle}>
+                  Tier de interesse <span style={{ textTransform: 'none', letterSpacing: 0, color: '#7d7466' }}>(opcional)</span>
+                </span>
+                <select name="interesse" className="form-input" style={{ appearance: 'none' }} defaultValue="">
+                  {tierOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
                 </select>
               </label>
             )}
 
+            <div style={{ gridColumn: '1 / -1', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 16, marginTop: 6 }}>
+              <button
+                type="submit"
+                className="btn-gold"
+                disabled={status === 'loading'}
+                style={{ fontSize: 12.5, opacity: status === 'loading' ? 0.7 : 1 }}
+              >
+                {status === 'loading' ? 'Enviando…' : 'Quero ser avisado'}
+              </button>
+              <p style={{ margin: 0, fontSize: 12.5, color: '#7d7466', maxWidth: 330 }}>
+                Usamos seus dados só para avisar sobre a pré-venda da CASA Box.
+              </p>
+            </div>
+
             {status === 'error' && (
-              <p style={{ margin: 0, fontSize: 13.5, color: '#e07070', textAlign: 'center' }}>
+              <p role="alert" style={{ gridColumn: '1 / -1', margin: 0, fontSize: 13.5, color: '#d98f6e' }}>
                 {submitError}
               </p>
             )}
-
-            <button
-              type="submit"
-              className="btn-gold"
-              disabled={status === 'loading'}
-              style={{ marginTop: 6, justifyContent: 'center', opacity: status === 'loading' ? 0.7 : 1 }}
-            >
-              {status === 'loading' ? 'Enviando...' : 'Entrar na Lista de Espera'}
-            </button>
-
-            <p style={{ margin: '12px 0 0', fontSize: 12, lineHeight: 1.6, color: '#a99f8d', textAlign: 'center' }}>
-              Ao enviar, você concorda em receber contato do CASA CAR CLUB. Seus dados são tratados conforme a LGPD.
-            </p>
           </form>
         )}
       </div>

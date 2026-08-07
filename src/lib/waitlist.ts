@@ -2,7 +2,7 @@ export interface WaitlistEntry {
   nome: string
   email: string
   whatsapp: string
-  carro: string
+  carro?: string
   interesse: string
   consent_at?: string
 }

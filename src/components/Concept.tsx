@@ -2,7 +2,7 @@ export default function Concept() {
   return (
     <section
       id="conceito"
-      style={{ padding: 'clamp(80px,11vw,140px) clamp(20px,5vw,56px)', background: '#0A0A0A' }}
+      style={{ padding: 'clamp(72px,10vw,132px) clamp(20px,5vw,80px)' }}
     >
       <div style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 30 }}>
@@ -35,8 +35,8 @@ export default function Concept() {
             color: '#c7bfb1',
           }}
         >
-          Um espaço privado feito para apaixonados por carro se encontrarem, criarem, tocarem seus projetos,
-          viverem eventos exclusivos e se conectarem com marcas e outros membros.
+          Um clube para apaixonados por carro se encontrarem, tocarem seus projetos e se conectarem.
+          Hoje isso acontece na comunidade e no Pocket CASA.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 44, flexWrap: 'wrap', alignItems: 'center' }}>
