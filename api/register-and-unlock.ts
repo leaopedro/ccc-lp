@@ -29,6 +29,34 @@ const FRIDGE_DB_ID = process.env.NOTION_FRIDGE_DATABASE_ID ?? ''
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// Garante que o database tenha as colunas necessárias e descobre o nome real da
+// coluna-título (todo DB tem exatamente uma, com qualquer nome). Cria Email/Phone
+// automaticamente se faltarem — assim você não precisa criar coluna na mão.
+// Resultado é cacheado por dbId enquanto a função estiver "quente".
+const titleNameCache = new Map<string, string>()
+
+async function ensureSchema(dbId: string): Promise<string> {
+  const cached = titleNameCache.get(dbId)
+  if (cached) return cached
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const db = (await notion.databases.retrieve({ database_id: dbId })) as any
+  const props: Record<string, { type: string }> = db.properties ?? {}
+
+  const titleName = Object.keys(props).find((k) => props[k].type === 'title') ?? 'Name'
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toAdd: Record<string, any> = {}
+  if (!props['Email']) toAdd['Email'] = { email: {} }
+  if (!props['Phone']) toAdd['Phone'] = { phone_number: {} }
+  if (Object.keys(toAdd).length > 0) {
+    await notion.databases.update({ database_id: dbId, properties: toAdd })
+  }
+
+  titleNameCache.set(dbId, titleName)
+  return titleName
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
@@ -67,9 +95,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   let saved = false
   if (FRIDGE_DB_ID && process.env.NOTION_TOKEN) {
     try {
+      const titleName = await ensureSchema(FRIDGE_DB_ID)
+
       type NotionProps = Parameters<typeof notion.pages.create>[0]['properties']
       const properties: NotionProps = {
-        Name: { title: [{ text: { content: nameForBackend } }] },
+        [titleName]: { title: [{ text: { content: nameForBackend } }] },
         Email: { email: cleanEmail },
       }
       if (cleanPhone) properties['Phone'] = { phone_number: cleanPhone }
