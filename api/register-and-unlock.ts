@@ -1,23 +1,31 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { Client } from '@notionhq/client'
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Server-side proxy: cadastro → unlock da geladeira.
+// Server-side proxy: cadastro (Notion) → unlock da geladeira (Railway).
 //
-// O browser NUNCA vê a FRIDGE_UNLOCK_API_KEY. O fluxo é:
+// O browser NUNCA vê a FRIDGE_UNLOCK_API_KEY nem o token do Notion. Fluxo:
 //   browser → POST /api/register-and-unlock (esta função)
-//           → POST {BACKEND}/api/fridge/unlock  (com header X-API-Key)
+//           → salva o lead no Notion (best-effort)
+//           → POST {BACKEND}/api/fridge/unlock  (header X-API-Key)
 //
-// Este handler é totalmente self-contained (sem imports cross-file): as funções
-// serverless deste projeto NÃO são bundladas pela Vercel, então qualquer import
-// relativo quebraria em produção.
+// Handler self-contained (sem imports cross-file relativos): as funções
+// serverless deste projeto NÃO são bundladas pela Vercel. Imports de PACOTES
+// (@notionhq/client) são ok — igual a api/waitlist.ts.
+//
+// O device é fixo no servidor (fridge-01): o backend NÃO recebe id nenhum e o
+// schema do body é .strict() — qualquer campo extra => 400. Body aceito, todos
+// opcionais: { name (1-120), email (válido), phone (3-32) }.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BACKEND_URL = (
   process.env.FRIDGE_BACKEND_URL ?? 'https://ccc-app-production.up.railway.app'
 ).replace(/\/$/, '')
 const UNLOCK_PATH = process.env.FRIDGE_UNLOCK_PATH ?? '/api/fridge/unlock'
-const FRIDGE_ID = process.env.FRIDGE_ID ?? 'fridge-01'
 const API_KEY = process.env.FRIDGE_UNLOCK_API_KEY ?? ''
+
+const notion = new Client({ auth: process.env.NOTION_TOKEN })
+const FRIDGE_DB_ID = process.env.NOTION_FRIDGE_DATABASE_ID ?? ''
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -32,21 +40,51 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     phone?: string
   }
 
-  // 1. Validação dos campos
-  if (!name || !name.trim() || name.trim().length < 2) {
+  // 1. Validação
+  const cleanName = (name ?? '').trim()
+  const cleanEmail = (email ?? '').trim()
+  const cleanPhone = (phone ?? '').trim()
+
+  if (!cleanName || cleanName.length < 2) {
     return res.status(400).json({ error: 'Nome é obrigatório.' })
   }
-  if (!email || !EMAIL_RE.test(email.trim())) {
+  if (!EMAIL_RE.test(cleanEmail)) {
     return res.status(400).json({ error: 'E-mail inválido.' })
   }
 
   if (!API_KEY) {
-    // Falha de configuração do servidor — não expõe detalhes ao cliente.
     console.error('[register-and-unlock] FRIDGE_UNLOCK_API_KEY não configurada')
     return res.status(500).json({ error: 'Servidor não configurado. Tente novamente mais tarde.' })
   }
 
-  // 2. Chamada autenticada server-side ao backend (Railway).
+  // Respeitar os limites do schema .strict() do backend
+  const nameForBackend = cleanName.slice(0, 120)
+  // phone só entra se tiver 3-32 chars (senão o backend rejeita)
+  const phoneForBackend =
+    cleanPhone.length >= 3 && cleanPhone.length <= 32 ? cleanPhone : undefined
+
+  // 2. Salvar o lead no Notion (best-effort — não bloqueia o unlock se falhar).
+  let saved = false
+  if (FRIDGE_DB_ID && process.env.NOTION_TOKEN) {
+    try {
+      type NotionProps = Parameters<typeof notion.pages.create>[0]['properties']
+      const properties: NotionProps = {
+        Name: { title: [{ text: { content: nameForBackend } }] },
+        Email: { email: cleanEmail },
+      }
+      if (cleanPhone) properties['Phone'] = { phone_number: cleanPhone }
+
+      await notion.pages.create({ parent: { database_id: FRIDGE_DB_ID }, properties })
+      saved = true
+    } catch (err) {
+      // Não derruba o unlock por causa do Notion — só registra.
+      console.error('[register-and-unlock] falha ao salvar lead no Notion:', err)
+    }
+  } else {
+    console.warn('[register-and-unlock] Notion não configurado — lead não persistido')
+  }
+
+  // 3. Chamada autenticada server-side ao backend (Railway) → unlock.
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 15_000)
 
@@ -58,11 +96,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         'X-API-Key': API_KEY,
       },
       body: JSON.stringify({
-        fridgeId: FRIDGE_ID,
-        // dados do lead — o backend pode ignorar ou persistir
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone?.trim() || undefined,
+        name: nameForBackend,
+        email: cleanEmail,
+        ...(phoneForBackend ? { phone: phoneForBackend } : {}),
       }),
       signal: controller.signal,
     })
@@ -75,18 +111,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       /* resposta não-JSON — mantém texto cru */
     }
 
-    if (!backendRes.ok) {
-      console.error(
-        `[register-and-unlock] backend respondeu ${backendRes.status}:`,
-        rawText.slice(0, 500),
-      )
-      return res.status(502).json({
-        error: 'Não foi possível abrir a geladeira. Tente novamente.',
-        backendStatus: backendRes.status,
-      })
+    if (backendRes.ok) {
+      return res.status(200).json({ ok: true, unlocked: true, saved, backend: backendBody })
     }
 
-    return res.status(200).json({ ok: true, unlocked: true, fridgeId: FRIDGE_ID, backend: backendBody })
+    // 4. Mapear os erros conhecidos do backend para mensagens claras.
+    console.error(
+      `[register-and-unlock] backend respondeu ${backendRes.status}:`,
+      rawText.slice(0, 500),
+    )
+    switch (backendRes.status) {
+      case 401:
+        // API key inválida → problema de config do servidor, não do usuário.
+        return res.status(500).json({ error: 'Servidor não configurado. Tente novamente mais tarde.' })
+      case 503:
+        return res
+          .status(503)
+          .json({ error: 'A geladeira está offline no momento. Tente novamente em instantes.', saved })
+      case 429:
+        return res
+          .status(429)
+          .json({ error: 'Muitas tentativas. Aguarde um minuto e tente de novo.', saved })
+      default:
+        return res.status(502).json({
+          error: 'Não foi possível abrir a geladeira. Tente novamente.',
+          backendStatus: backendRes.status,
+          saved,
+        })
+    }
   } catch (err) {
     const aborted = err instanceof Error && err.name === 'AbortError'
     console.error('[register-and-unlock] erro ao chamar backend:', err)
@@ -94,6 +146,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       error: aborted
         ? 'O servidor demorou para responder. Tente novamente.'
         : 'Erro de conexão com o servidor. Tente novamente.',
+      saved,
     })
   } finally {
     clearTimeout(timeout)
