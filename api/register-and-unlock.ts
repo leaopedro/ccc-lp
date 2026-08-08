@@ -30,19 +30,28 @@ const FRIDGE_DB_ID = process.env.NOTION_FRIDGE_DATABASE_ID ?? ''
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Garante que o database tenha as colunas necessárias e descobre o nome real da
-// coluna-título (todo DB tem exatamente uma, com qualquer nome). Cria Email/Phone
-// automaticamente se faltarem — assim você não precisa criar coluna na mão.
+// coluna-título. IMPORTANTE: o SDK v5 usa a API 2026-03-11, em que o schema
+// (colunas) vive na DATA SOURCE do database, não no database. Então:
+//   databases.retrieve -> pega o data_source_id
+//   dataSources.retrieve -> lê as colunas atuais
+//   dataSources.update -> cria Email/Phone se faltarem
+// (databases.update NÃO altera o schema nessa API — era o bug do "not a property").
 // Resultado é cacheado por dbId enquanto a função estiver "quente".
-const titleNameCache = new Map<string, string>()
+type SchemaInfo = { titleName: string; dataSourceId: string }
+const schemaCache = new Map<string, SchemaInfo>()
 
-async function ensureSchema(dbId: string): Promise<string> {
-  const cached = titleNameCache.get(dbId)
+async function ensureSchema(dbId: string): Promise<SchemaInfo> {
+  const cached = schemaCache.get(dbId)
   if (cached) return cached
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = (await notion.databases.retrieve({ database_id: dbId })) as any
-  const props: Record<string, { type: string }> = db.properties ?? {}
+  const dataSourceId: string | undefined = db.data_sources?.[0]?.id
+  if (!dataSourceId) throw new Error('database sem data source')
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ds = (await notion.dataSources.retrieve({ data_source_id: dataSourceId })) as any
+  const props: Record<string, { type: string }> = ds.properties ?? {}
   const titleName = Object.keys(props).find((k) => props[k].type === 'title') ?? 'Name'
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,11 +59,12 @@ async function ensureSchema(dbId: string): Promise<string> {
   if (!props['Email']) toAdd['Email'] = { email: {} }
   if (!props['Phone']) toAdd['Phone'] = { phone_number: {} }
   if (Object.keys(toAdd).length > 0) {
-    await notion.databases.update({ database_id: dbId, properties: toAdd })
+    await notion.dataSources.update({ data_source_id: dataSourceId, properties: toAdd })
   }
 
-  titleNameCache.set(dbId, titleName)
-  return titleName
+  const info: SchemaInfo = { titleName, dataSourceId }
+  schemaCache.set(dbId, info)
+  return info
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -100,7 +110,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   else if (!process.env.NOTION_TOKEN) saveError = 'missing_token'
   else {
     try {
-      const titleName = await ensureSchema(FRIDGE_DB_ID)
+      const { titleName, dataSourceId } = await ensureSchema(FRIDGE_DB_ID)
 
       type NotionProps = Parameters<typeof notion.pages.create>[0]['properties']
       const properties: NotionProps = {
@@ -109,7 +119,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
       if (cleanPhone) properties['Phone'] = { phone_number: cleanPhone }
 
-      await notion.pages.create({ parent: { database_id: FRIDGE_DB_ID }, properties })
+      await notion.pages.create({
+        parent: { type: 'data_source_id', data_source_id: dataSourceId },
+        properties,
+      })
       saved = true
     } catch (err) {
       // Não derruba o unlock por causa do Notion — só registra.
