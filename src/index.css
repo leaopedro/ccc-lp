@@ -86,6 +86,17 @@ input::placeholder {
 .hero-anim-3 { animation: heroUp 0.8s ease 0.24s both; }
 .hero-anim-4 { animation: heroUp 0.8s ease 0.32s both; }
 
+/* /geladeira — barra de loading (sweep) e halo do estado de sucesso */
+@keyframes gSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(320%); }
+}
+
+@keyframes gHalo {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
