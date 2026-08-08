@@ -92,8 +92,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     cleanPhone.length >= 3 && cleanPhone.length <= 32 ? cleanPhone : undefined
 
   // 2. Salvar o lead no Notion (best-effort — não bloqueia o unlock se falhar).
+  // saveError é um código de diagnóstico SEGURO (não vaza segredos) para
+  // sabermos, pela resposta, por que a persistência falhou.
   let saved = false
-  if (FRIDGE_DB_ID && process.env.NOTION_TOKEN) {
+  let saveError: string | undefined
+  if (!FRIDGE_DB_ID) saveError = 'missing_db_id'
+  else if (!process.env.NOTION_TOKEN) saveError = 'missing_token'
+  else {
     try {
       const titleName = await ensureSchema(FRIDGE_DB_ID)
 
@@ -108,10 +113,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       saved = true
     } catch (err) {
       // Não derruba o unlock por causa do Notion — só registra.
+      // Notion SDK expõe `.code` (ex.: object_not_found, unauthorized,
+      // validation_error) — seguro para devolver como diagnóstico.
+      const code = (err as { code?: string }).code
+      saveError = code ?? (err instanceof Error ? err.message.slice(0, 120) : 'unknown')
       console.error('[register-and-unlock] falha ao salvar lead no Notion:', err)
     }
-  } else {
-    console.warn('[register-and-unlock] Notion não configurado — lead não persistido')
   }
 
   // 3. Chamada autenticada server-side ao backend (Railway) → unlock.
@@ -142,7 +149,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     if (backendRes.ok) {
-      return res.status(200).json({ ok: true, unlocked: true, saved, backend: backendBody })
+      return res.status(200).json({ ok: true, unlocked: true, saved, saveError, backend: backendBody })
     }
 
     // 4. Mapear os erros conhecidos do backend para mensagens claras.
@@ -157,16 +164,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       case 503:
         return res
           .status(503)
-          .json({ error: 'A geladeira está offline no momento. Tente novamente em instantes.', saved })
+          .json({ error: 'A geladeira está offline no momento. Tente novamente em instantes.', saved, saveError })
       case 429:
         return res
           .status(429)
-          .json({ error: 'Muitas tentativas. Aguarde um minuto e tente de novo.', saved })
+          .json({ error: 'Muitas tentativas. Aguarde um minuto e tente de novo.', saved, saveError })
       default:
         return res.status(502).json({
           error: 'Não foi possível abrir a geladeira. Tente novamente.',
           backendStatus: backendRes.status,
           saved,
+          saveError,
         })
     }
   } catch (err) {
@@ -177,6 +185,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ? 'O servidor demorou para responder. Tente novamente.'
         : 'Erro de conexão com o servidor. Tente novamente.',
       saved,
+      saveError,
     })
   } finally {
     clearTimeout(timeout)
