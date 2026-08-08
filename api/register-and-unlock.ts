@@ -116,7 +116,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // Notion SDK expõe `.code` (ex.: object_not_found, unauthorized,
       // validation_error) — seguro para devolver como diagnóstico.
       const code = (err as { code?: string }).code
-      saveError = code ?? (err instanceof Error ? err.message.slice(0, 120) : 'unknown')
+      const msg = err instanceof Error ? err.message : String(err)
+      // Inclui a mensagem do Notion (ex.: qual coluna/tipo falhou) — é segura.
+      saveError = (code ? `${code}: ` : '') + msg.slice(0, 300)
       console.error('[register-and-unlock] falha ao salvar lead no Notion:', err)
     }
   }
