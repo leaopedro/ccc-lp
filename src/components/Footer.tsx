@@ -39,6 +39,7 @@ export default function Footer() {
           <a href={WHATSAPP_URL} onClick={() => track('whatsapp_group_click')} className="link-muted">Grupo do WhatsApp</a>
           <a href={`mailto:${COMMERCIAL_EMAIL}`} className="link-muted">{COMMERCIAL_EMAIL}</a>
           <a href="/privacy" className="link-muted">Política de privacidade</a>
+          <a href="/terms" className="link-muted">Termos de uso</a>
         </nav>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'flex-start' }}>
